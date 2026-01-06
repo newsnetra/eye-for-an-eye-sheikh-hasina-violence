@@ -635,34 +635,27 @@ p {
     display: block;
 }
 
-/* 4. TEXT HIGHLIGHT STYLES (Merged Logic)
-       ========================================= */
+
+
+
 .highlight-text {
-    /* The visual style from Snippet 2 */
-    background-color: var(--bg-highlight);
     color: var(--text-color);
-    /* VITAL: Wraps padding/background correctly on new lines */
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
     font-weight: 400;
     transition: background-color 0.2s;
 }
 
-/* Hover effect on text container */
 .inline-trigger:hover .highlight-text {
     background-color: transparent;
 }
 
-/* Karaoke Word Logic (From Snippet 1) 
-       Note: I added spans to the HTML to demonstrate this */
 .karaoke-word {
     transition: color 0.2s ease;
-    /* Optional: Start slightly faded if you want strict karaoke style */
     background-color: var(--bg);
     font-family: var(--mono);
 }
 
-/* Example active word style if you implement JS tracking */
 .karaoke-word.active {
     color: var(--text-color);
     font-weight: 700;
