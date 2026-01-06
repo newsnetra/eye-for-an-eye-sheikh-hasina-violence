@@ -28,10 +28,18 @@
     --bg-highlight: #f0f0f0;
 }
 
-body {
+html, body {
     margin: 0;
     color: var(--text-color);
     background-color: var(--accent);
+    font-variant-ligatures: normal;
+    font-variation-settings: normal;
+    font-feature-settings: normal;
+    -webkit-text-size-adjust: 100%;
+    font-stretch: 100%;
+    word-wrap: break-word;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
 article {
@@ -166,14 +174,6 @@ article {
     line-height: 1.55;
     font-style: italic;
     font-family: 'utopia-std-display', var(--font-utopia);
-    font-variant-ligatures: normal;
-    font-variation-settings: normal;
-    font-feature-settings: normal;
-    -webkit-text-size-adjust: 100%;
-    font-stretch: 100%;
-    word-wrap: break-word;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
 }
 
 .hero__byline {
@@ -654,6 +654,7 @@ p {
     transition: color 0.2s ease;
     background-color: var(--bg);
     font-family: var(--mono);
+    font-size: 23px;
 }
 
 .karaoke-word.active {
@@ -813,7 +814,7 @@ footer {
 
     .story-text,
     p {
-        margin: auto 18px;
+        margin: 18px;
     }
 }
 
@@ -821,4 +822,8 @@ footer {
     .tg-call {
         max-width: 100%;
     }
+
+    .karaoke-word {
+    font-size: 20px;
+}
 }
