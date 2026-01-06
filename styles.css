@@ -813,7 +813,7 @@ footer {
 
     .story-text,
     p {
-        margin: 18px;
+        margin: -1px 18px 18px 18px;
     }
 }
 
