@@ -159,13 +159,19 @@ article {
     padding-top: clamp(4px, 1vw, 14px);
 }
 
-.hero__title {
+h2, .hero__title {
     margin: 0 0 18px 0;
     font-size: clamp(44px, 6.2vw, 84px);
     line-height: 0.98;
     letter-spacing: -0.02em;
     color: var(--accent);
     font-family: var(--sans);
+}
+
+h2 {
+    margin: auto;
+    max-width: 618px;
+    font-size: 20px;
 }
 
 .hero__dek {
