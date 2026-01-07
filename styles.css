@@ -52,7 +52,7 @@ article {
     height: 35px;
     width: 100%;
     background: var(--accent);
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #eee;
     z-index: 9999;
     display: flex;
     align-items: center;
@@ -248,7 +248,6 @@ p {
     max-width: 80%;
     margin: 40px auto;
     background: var(--bg);
-    border: 1px solid var(--stroke);
     border-radius: var(--r-xl);
     padding: 18px;
     color: var(--text);
@@ -295,7 +294,6 @@ p {
     color: var(--text-color);
     font-family: var(--mono);
     font-size: 14px;
-    border: 1px solid rgba(31, 134, 199, 0.10);
 }
 
 .tg-call__grid {
@@ -313,8 +311,7 @@ p {
 }
 
 .tg-tile {
-    border-radius: var(--r-xl);
-    border: 1px solid rgba(15, 23, 42, 0.06);
+    border-radius: var(--r-lg);
     overflow: hidden;
 }
 
@@ -469,7 +466,6 @@ p {
 /* Transcript panel */
 .tg-transcript {
     background: var(--panel);
-    border: 1px solid var(--stroke);
     border-radius: var(--r-xl);
     padding: 18px;
     display: grid;
@@ -533,8 +529,8 @@ p {
     display: grid;
     place-items: center;
     cursor: pointer;
-    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
     transition: transform 120ms ease, filter 120ms ease;
+    background-color: transparent;
 }
 
 .tg-btn:hover {
@@ -546,33 +542,17 @@ p {
 }
 
 .tg-btn img {
-    width: 28px;
-    height: 28px;
+    width: 45px;
+    height: 45px;
 }
 
 .tg-btn--ghost {
-    background: #f2f3f5;
     cursor: default;
     box-shadow: none;
-    border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.tg-btn--ghost img {
-    opacity: 0.75;
-}
 
-.tg-btn--blue {
-    background: var(--tg-blue);
-}
 
-.tg-btn--red {
-    background: var(--danger);
-}
-
-.tg-call.is-paused .tg-btn--blue,
-.tg-call.is-paused .tg-btn--red {
-    filter: grayscale(0.1) saturate(0.85) brightness(0.98);
-}
 
 /* 2. INLINE PLAYER CONTAINER
        ========================================= */
@@ -776,11 +756,226 @@ footer {
     line-height: 1.6;
     color: #999;
     max-width: 550px;
-    margin: auto;
+    margin: 20px auto;
     padding: 1rem;
-    border-top: 1px solid #333;
+    border-top: 1px solid #eee;
     text-align: center;
 }
+
+
+
+  .rc-player{
+    font-family: var(--mono);
+    max-width: 920px;
+    margin: auto;
+  }
+
+  .rc-list{
+    border-radius: 18px;
+    background: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    padding: 10px;
+  }
+
+  .rc-listbar{
+    display:flex;
+    justify-content:flex-start;
+    padding: 6px 6px 12px 6px;
+  }
+
+  .rc-lang{
+    display:inline-flex;
+    gap: 6px;
+    padding: 6px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,.06);
+  }
+  .rc-lang-btn{
+    appearance:none;
+    border: 0;
+    background: transparent;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    cursor:pointer;
+    opacity:.7;
+  }
+  .rc-lang-btn.is-active{
+    background: rgba(255,255,255,.9);
+    border: 1px solid rgba(0,0,0,.08);
+    opacity: 1;
+  }
+
+  .rc-item{
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    margin: 10px 6px;
+  }
+
+  .rc-row{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    padding: 14px 14px;
+  }
+
+  .rc-ctrl{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    flex: 0 0 auto;
+  }
+
+  .rc-iconbtn{
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    border: transparent;
+    background: transparent;
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    padding: 0;
+  }
+  .rc-iconbtn:active{ transform: translateY(1px); }
+  .rc-iconbtn[disabled]{
+    opacity:.45;
+    cursor:not-allowed;
+  }
+  .rc-icon{
+    width: 25px;
+    height: 25px;
+    display:block;
+    opacity:.9;
+  }
+
+  .rc-main{
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .rc-title{
+    display:flex;
+    align-items:baseline;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .rc-file{
+    font-size: 12px;
+    opacity: .55;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 36ch;
+  }
+
+  .rc-preview{
+    font-size: 22px;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: .75;
+  }
+
+  .rc-item.is-active .rc-preview{
+    opacity: 1;
+    color: rgba(0,0,0,.9);
+  }
+
+  .rc-body{
+    display:none;
+    padding: 0 14px 14px 14px;
+  }
+  .rc-item.is-active .rc-body{
+    display:block;
+  }
+
+  .rc-progress{
+    position: relative;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.12);
+    cursor: pointer;
+    margin: 8px 0 12px 0;
+  }
+  .rc-progress-fill{
+    position:absolute;
+    left:0;
+    top:0;
+    height:100%;
+    width:0%;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+  .rc-timebar{
+    display:flex;
+    justify-content:space-between;
+    font-size: 12px;
+    opacity:.6;
+    margin-top: 6px;
+  }
+
+  .rc-subs{
+    border-radius: 8px;
+    background: rgba(255,255,255,.75);
+    border: 1px solid rgba(0,0,0,.06);
+    overflow:hidden;
+    max-height: 210px;
+    margin: 10px auto;
+  }
+
+  .rc-subline{
+    display:flex;
+    align-items:flex-start;
+    gap: 12px;
+    padding: 12px 12px;
+    border-top: 1px solid rgba(0,0,0,.05);
+  }
+  .rc-subline:first-child{ border-top: 0; }
+
+  .rc-ts{
+    font-size: 12px;
+    opacity:.55;
+    width: 54px;
+    flex: 0 0 auto;
+  }
+  .rc-text{
+    font-size: 22px;
+    line-height: 1.35;
+    min-width: 0;
+  }
+
+  .rc-subline.is-current{
+    background: rgba(217,76,63,.10);
+  }
+
+  .rc-footer{
+    display:flex;
+    justify-content:center;
+    padding: 12px 0 0 0;
+  }
+  .rc-more{
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,.10);
+    background: rgba(255,255,255,.9);
+    cursor:pointer;
+  }
+
+  .rc-empty{
+    padding: 18px;
+    opacity: .7;
+    font-size: 14px;
+  }
+
+  
+
+
 
 @media (max-width: 980px) {
     .tg-call__grid {
@@ -832,3 +1027,8 @@ footer {
     font-size: 20px;
 }
 }
+
+@media (max-width: 640px){
+    .rc-preview, .rc-text{ font-size: 18px; }
+    .rc-file{ max-width: 22ch; }
+  }
