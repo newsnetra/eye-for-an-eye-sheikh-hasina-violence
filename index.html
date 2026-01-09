@@ -366,7 +366,8 @@
       </div>
 
       <p class="story-text">
-        She advanced a similar argument in another call in September last year, suggesting that the banning of the Awami League and its
+        She advanced a similar argument in another call in September last year, suggesting that the banning of the Awami
+        League and its
         affiliated organisations somehow shielded the party from responsibility for any acts of subversion carried out
         in
         its name.
@@ -652,7 +653,8 @@
           <span class="highlight-text target-text">
             <span class="karaoke-scope">“An eye for an eye, a
               hand for a
-              hand — keeping in mind the Quran, you will take action with whatever you have. That’s what I want,”</span> she concluded.
+              hand — keeping in mind the Quran, you will take action with whatever you have. That’s what I want,”</span>
+            she concluded.
 
           </span>
 
@@ -703,7 +705,8 @@
           <span class="highlight-text target-text">
             <span class="karaoke-scope">“How dare they issue a warrant against these officers? I want to ask, ‘Where did
               they find the
-              audacity to do this? Don’t they have any courageous officer now?’”</span> she asked in an address posted to Facebook on October 18th 2025.
+              audacity to do this? Don’t they have any courageous officer now?’”</span> she asked in an address posted
+            to Facebook on October 18th 2025.
           </span>
 
           <audio preload="none"></audio>
@@ -1264,9 +1267,9 @@
 
   <script>
     (() => {
-      const CSV_URL = "recording_collections.csv";
-      const AUDIO_DIR = "assets/audio/";
-      const ICON_DIR = "assets/icons/";
+      const CSV_URL = "/recording_collections.csv";
+      const AUDIO_DIR = "/assets/audio/";
+      const ICON_DIR = "/assets/icons/";
       const ICONS = {
         play: ICON_DIR + "play.svg",
         pause: ICON_DIR + "pause.svg",
@@ -1664,9 +1667,10 @@
         if (timebar) timebar.textContent = formatTime(elAudio.currentTime);
       });
 
-      audio?.addEventListener("loadedmetadata", () => {
-        updateTranscript(audio.currentTime); // <-- add
+      elAudio.addEventListener("loadedmetadata", () => {
+        render();
       });
+
       elAudio.addEventListener("play", () => render());
       elAudio.addEventListener("pause", () => render());
       elAudio.addEventListener("ended", () => render());
