@@ -77,8 +77,7 @@
   <article class="article-container">
     <p class="story-text has-dropcap">
       <span class="dropcap">I</span>n the weeks before her sentencing for crimes against humanity on November 17th 2025,
-      Sheikh
-      Hasina set out to remake her image. From exile in India, the ousted prime minister gave a string of emailed
+      Sheikh Hasina set out to remake her image. From exile in India, the ousted prime minister gave a string of emailed
       interviews to international outlets, striking a careful, even conciliatory tone. She spoke of justice “for all”,
       mourned “each life lost” under her watch, and warned against deepening “division” in Bangladesh. In one interview,
       she went so far as to appeal for national healing.
@@ -87,46 +86,21 @@
       Off script, however, a radically different Hasina was speaking. In impromptu phone calls to party activists where
       no public relations team was shaping her words, she urged revenge, called for homes to be burned in retaliation,
       pressed for guerrilla-style armed retribution, and scolded supporters for not retaliating with violence. In one
-      recording, she even asked why the Bangladeshi army was not rolling out tanks to overthrow the interim government
-      that replaced her.
+      recording, she even asked why the Bangladeshi army was not rolling out tanks after a court initiated proceedings
+      against some of its officers for gross human rights abuses.
     </p>
     <p class="story-text">
       In English, Hasina cast herself as a liberal democrat committed to justice and restraint. In Bengali, speaking to
       loyalists, she demanded “an eye for an eye”, even invoking Quranic verses to justify her incitement.
     </p>
-    <div class="story-text">
-
-      <div class="inline-trigger audio-trigger"
-        data-src="./assets/audio/AL men will be compensated with Yunus' supporters properties.mp3">
-        <span class="inline-icon" aria-hidden="true">
-          <span class="icon icon-play"></span>
-          <span class="icon icon-pause"></span>
-        </span>
-
-        <span class="highlight-text target-text">
-          “I will settle the score one by one,” she said in one call.
-          “They will harm my activists time and again – and will I just stand by and watch? No.”
-          <br>
-          “I’ll clean it out this time,” she added.
-          “My aim now is to clear away the filth.”
-        </span>
-
-        <audio preload="metadata"></audio>
-      </div>
-
-
-
-    </div>
 
 
     <p class="story-text">
       Netra News reviewed more than two dozen of the call recordings, which show a leader who sounds embittered,
-      aggrieved and
-      increasingly desperate, casting herself as a victim entitled to retribution. Circulated openly in short clips for
-      more than a year among
-      Awami League supporters, the recordings amounted to unambiguous calls for violence. What is striking is not only
-      the brazenness of those appeals, but the degree of tolerance shown by her Indian hosts, who have continued to
-      speak publicly of “peace and stability” in Bangladesh.
+      aggrieved and increasingly desperate, casting herself as a victim entitled to retribution. Circulated openly in
+      short clips for more than a year among Awami League supporters, the recordings amounted to unambiguous calls for
+      violence. What is striking is not only the brazenness of those appeals, but the degree of tolerance shown by her
+      Indian hosts, who have continued to speak publicly of “peace and stability” in Bangladesh.
     </p>
     <p class="story-text">
       Hasina’s UK-based PR firm, Palatine, and an Awami League spokesperson in India did not respond to requests for
@@ -134,6 +108,7 @@
       to a request for comment.
     </p>
     <!-- ===== Telegram-style call UI (standalone fragment) ===== -->
+
     <div class="tg-call" data-call>
       <div class="tg-call__top">
         <div class="tg-call__brand">
@@ -145,10 +120,13 @@
           <span class="tg-chip">21:03</span>
         </div>
       </div>
+
       <div class="tg-call__grid">
         <!-- LEFT: participants tiles -->
         <section class="tg-tiles" aria-label="Participants">
-          <div class="tg-tile tg-tile--primary" aria-label="Active speaker Sheikh Hasina">
+          <!-- Primary tile (JS updates name + initials dynamically) -->
+          <div class="tg-tile tg-tile--primary is-speaking" data-speaker="Sheikh Hasina"
+            aria-label="Active speaker Sheikh Hasina">
             <div class="tg-tile__avatar">
               <div class="tg-avatar">
                 <span class="tg-avatar__letters">SH</span>
@@ -161,50 +139,57 @@
               </div>
             </div>
           </div>
+
           <div class="tg-tile-row">
-            <div class="tg-tile tg-tile--peach">
-              <div class="tg-mini-avatar">L1</div>
-              <div class="tg-mini-name">Listener No. 1</div>
+            <div class="tg-tile tg-tile--peach" data-speaker="Follower 1" aria-label="Follower 1">
+              <div class="tg-mini-avatar">F1</div>
+              <div class="tg-mini-name">Follower 1</div>
             </div>
-            <div class="tg-tile tg-tile--lav">
-              <div class="tg-mini-avatar">L2</div>
-              <div class="tg-mini-name">Listener No. 2</div>
+
+            <div class="tg-tile tg-tile--lav" data-speaker="Follower 2" aria-label="Follower 2">
+              <div class="tg-mini-avatar">F2</div>
+              <div class="tg-mini-name">Follower 2</div>
             </div>
-            <div class="tg-tile tg-tile--mint">
-              <div class="tg-mini-avatar">L3</div>
-              <div class="tg-mini-name">Listener No. 2</div>
+
+            <div class="tg-tile tg-tile--mint" data-speaker="Follower 3" aria-label="Follower 3">
+              <div class="tg-mini-avatar">F3</div>
+              <div class="tg-mini-name">Follower 3</div>
             </div>
+
             <div class="tg-tile tg-tile--more" aria-label="More participants">
               <div class="tg-more">+180</div>
             </div>
           </div>
         </section>
+
         <!-- RIGHT: transcript + controls -->
         <section class="tg-transcript" aria-label="Transcript panel">
           <div class="tg-transcript__label">Transcript</div>
-          <!-- This is where the “subtitle-progress” effect appears -->
-          <div class="tg-transcript__body" data-transcript>
-            <!-- JS will render segments here -->
-          </div>
+
+          <!-- JS renders ONLY the current speaker's line here -->
+          <div class="tg-transcript__body" data-transcript></div>
+
           <div class="tg-controls" aria-label="Call controls">
-            <!-- aesthetics-only -->
             <button class="tg-btn tg-btn--ghost" type="button" aria-disabled="true" tabindex="-1" data-video>
-              <img src="assets/icons/video_off.svg" alt="" />
+              <img src="./assets/icons/video_off.svg" alt="" />
             </button>
-            <!-- pauses audio -->
-            <button class="tg-btn tg-btn--blue" type="button" aria-label="Mute (pause audio)" data-mute>
-              <img src="assets/icons/mic_off.svg" alt="" />
+
+            <button class="tg-btn tg-btn--blue" type="button" aria-label="Play / pause" title="Play / pause" data-mute>
+              <img src="./assets/icons/mic_off.svg" alt="" />
             </button>
-            <!-- pauses audio -->
+
             <button class="tg-btn tg-btn--red" type="button" aria-label="End (pause audio)" data-end>
-              <img src="assets/icons/call_icon.svg" alt="" />
+              <img src="./assets/icons/call_icon.svg" alt="" />
             </button>
           </div>
-          <!-- audio (hook your src) -->
-          <audio data-audio preload="metadata" src="assets/audio/call.mp3"></audio>
+
+          <audio data-audio preload="metadata"
+            src="/assets/audio/Hasina orders to kill the ones who killed.mp3"></audio>
         </section>
       </div>
     </div>
+
+
     <p class="story-text">
       At Netra News’ request, Tech Global Institute (TGI) carried out an independent open-source forensic assessment of
       all but one publicly available audio clips, finding no conclusive evidence of material manipulation.
@@ -217,17 +202,18 @@
     </p>
     <p class="story-text">
       As these calls spread, Bangladesh slid into renewed turmoil. In the days before Hasina’s sentencing by the
-      International Crimes Tribunal — which later imposed the death penalty after a trial in absentia — arson attacks
-      and crude bombings targeted public transport and the homes of interim government officials. On December 12th, a
-      firebrand student leader, Osman Hadi, was shot in what investigators believe was a targeted political killing by
-      Awami League activists, a kind of assassination Bangladesh has not seen in decades.
+      International Crimes Tribunal (ICT) — which later imposed the death penalty after a trial in absentia — arson
+      attacks and crude bombings targeted public transport and the homes of interim government officials. On December
+      12th, a firebrand student leader, Osman Hadi, was shot in what investigators believe was a targeted political
+      killing by Awami League activists, a kind of assassination Bangladesh has not seen in decades.
     </p>
     <p class="story-text">
       Political violence is hardly new in Bangladesh, and parties almost always deny responsibility. This time, the
-      Awami League did not. Nor did Hasina’s family. Her son, Sajeeb Wazed, warned Reuters that excluding the party from
-      upcoming elections would lead to more bloodshed. “If these elections are allowed to go ahead, then Bangladesh
-      becomes another failed state,” he told Marya Shakil of India Today in November, as if issuing a threat. “With the
-      Awami League constantly protesting, it will turn into violence, and it will be an unstable country.”
+      Awami League did not. If anything, it’s promising more. Hasina’s US-based son and likely heir-apparent, Sajeeb
+      Wazed, warned Reuters that excluding the party from upcoming elections would lead to more bloodshed. “If these
+      elections are allowed to go ahead, then Bangladesh becomes another failed state,” he told India Today in November,
+      as if issuing a threat. “With the Awami League constantly protesting, it will turn into violence, and it will be
+      an unstable country.”
     </p>
     <h2>License to kill</h2>
     <p class="story-text">
@@ -235,96 +221,276 @@
       between 700 and 1,400.
     </p>
     <p class="story-text">
-      Just two months into her exile, Jahangir Alam, a former local official in northern Bangladesh, called her to say
-      his home had been torched, allegedly by supporters of the Bangladesh Nationalist Party and Jamaat-e-Islami, both
-      Hasina’s nemesis.
+      Just two months into her exile in August 2024, Jahangir Alam, a former local official in northern Bangladesh,
+      called her to say his home had been torched, allegedly by supporters of the Bangladesh Nationalist Party (BNP) and
+      Jamaat-e-Islami, both Hasina’s nemesis.
     </p>
-    <p class="story-text">
-      “Do they not have homes of their own? So? Must everything be done out in the open?” she snapped.
-    </p>
+    <div class="story-text">
+      <div class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 01 (Home-Public).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“Do they not have homes of their own?”</span> she questioned, instructively.
+          When Alam said they did, she replied,
+          <span class="karaoke-scope">“So? Must everything be done out in the open?”</span>
+        </span>
+
+        <audio preload="metadata"></audio>
+      </div>
+
+    </div>
+
     <p class="story-text">
       “If your homes can be destroyed, so can theirs,” she went on. “If they burn my house, I won’t hesitate to burn
-      theirs.” Alam agreed.
+      theirs.”
     </p>
     <p class="story-text">
-      By October that year, criminal complaints accusing Hasina of ordering the excessive use of force had piled up. “I
-      have 227 murder complaints against me across the country,” she told Alam. “So I’ve asked everyone: make a list.
-      You, too, should make a list — because I’ve got the licence to kill at least 227.”
+      Alam agreed.</p>
+    <p class="story-text">
+      By October that year, criminal complaints accusing Hasina of ordering excessive use of force had piled up.
     </p>
+    <div class="story-text">
+      <div class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 4 (License to kill 227).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
 
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“I have
+            227 murder complaints against me across Bangladesh,”</span> she told Alam.
+          <span class="karaoke-scope">“So I’ve asked everyone: make a list. You,
+            too, should make a list — because I’ve got the licence to kill at least 227.”</span>
+        </span>
+
+        <audio preload="metadata"></audio>
+      </div>
+    </div>
     <p class="story-text">
       The recording was rated lower in a voice-comparison analysis by independent researchers, though they found no
       evidence of AI-based manipulation. A separate forensic examination by the police’s Criminal Investigation
-      Department concluded that the recording was Sheikh Hasina’s and submitted that finding to a court, according to a
-      copy obtained by Netra News.
+      Department <a
+        href="https://www.tbsnews.net/bangladesh/court/ict-summons-hasina-over-licence-kill-226-people-remark-1151201"
+        rel="nofollow">reportedly concluded</a> that the recording was Sheikh Hasina’s and submitted that finding to a
+      court.
     </p>
 
     <p class="story-text">
-      In the same recording, she pushed the point further. “Whether it’s one murder or two and a quarter hundred, the
-      punishment is the same,
-      isn’t it? So let it be. I’ll face what comes. But before that, I’ll mark off each of those two and a quarter
-      hundred.”
+      In the same recording, she pushed the point further.
     </p>
+
+    <div class="story-text">
+      <div class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 01 (Home-Public).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“Whether it’s one murder or two and a quarter hundred, the
+            punishment is the same,
+            isn’t it? So let it be. I’ll face what comes. But before that, I’ll mark off each of those two and a quarter
+            hundred.”</span>
+        </span>
+        <audio preload="metadata"></audio>
+      </div>
+    </div>
+
     <p class="story-text">
       She advanced a similar argument in another call, suggesting that the banning of the Awami League and its
       affiliated organisations somehow shielded the party from responsibility for any acts of subversion carried out in
       its name.
     </p>
 
-    <p class="story-text">
-      “Our activities are now banned, so we no longer have a party,” she said. “Those who support the BNP and Jamaat
-      must be attacked. They must be killed. I see no other option. You will have to do it. The Awami League bears no
-      responsibility because the Awami League does not exist; the Chhatra League does not exist. We can do whatever we
-      want. So do whatever you want. Start now.”
-    </p>
+    <div class="story-text">
+      <div class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/call_3.mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“Since we are banned and we no longer have a party, those who support the BNP and
+            Jamaat must be attacked, killed — I see no other option,”</span> she said.
+          <span class="karaoke-scope">“They are doing it, so we’ll have to do it. The Awami League bears no
+            responsibility because the Awami League does not exist; the Chhatra League does not exist. We can do
+            whatever we want. So do whatever you want. Start now.”</span>
+        </span>
+
+        <audio preload="metadata"></audio>
+      </div>
+
+    </div>
+
+
 
     <p class="story-text">
-      In at least three other recordings posted on Facebook and YouTube in October, Hasina promised her supporters that
-      she would settle her political accounts.
+      In at least three other recordings retrieved in October 2025, Hasina promised her supporters that she would
+      deliver them revenge.
     </p>
     <p class="story-text">
       “I will settle the score one by one,” she said in one call. “They will harm my activists time and again — and will
       I just stand by and watch? No.”
     </p>
+
+    <div class="story-text">
+      <div class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 6 (Count and settle).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“I will settle the score one by one,”</span> she said in one call.
+          “They will harm my activists time and again — and will
+          I just stand by and watch? No.”
+        </span>
+
+        <audio preload="metadata"></audio>
+      </div>
+
+    </div>
+
+
+    <div class="story-text">
+      <div class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 8 (Filth of BD).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“I’ll clean it out this time,”</span> she added.
+
+          <span class="karaoke-scope">“My aim now is to clean away the filth. I will clean the filth of
+            Bangladesh.”</span>
+        </span>
+
+        <audio preload="metadata"></audio>
+      </div>
+
+    </div>
+
     <p class="story-text">
-      “I’ll clean it out this time,” she added. “My aim now is to clean away the filth. I will clean the filth of
-      Bangladesh.”
+      In another virtual speech made public in September 2025, she warned,
+      <span class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 9 (Hands will burn).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope"> “They must be shown, ‘If you touch fire, your hands will burn’.”</span>
+        </span>
+
+        <audio preload="metadata"></audio>
+      </span>
     </p>
+
+
+
     <p class="story-text">
-      In another virtual speech made public in September, she warned, “They must be shown, ‘If you touch fire, your
-      hands will burn’.”
+      Yet, none of this fury appeared in her international interviews. Writing to <a
+        href="https://www.independent.co.uk/asia/south-asia/sheikh-hasina-bangladesh-ict-sentence-b2854248.html"><em><span
+            style="font-weight: 400;">The Independent</em></a>, for example, she said she &ldquo;mourns each and every
+      child, sibling, cousin and friend we lost as a nation&rdquo; and urged Bangladesh to &ldquo;heal&rdquo;. In a
+      contemporaneous <a
+        href="https://www.france24.com/en/live-news/20251029-fugitive-ex-pm-says-bangladesh-vote-risks-deepening-divide">interview</a>
+      with Agence France-Presse, she said her priority was &ldquo;the welfare and stability of Bangladesh.&rdquo;
+      Speaking to Reuters, she <a
+        href="http://reuters.com/world/asia-pacific/bangladeshs-sheikh-hasina-warns-mass-voter-boycott-her-party-barred-election-2025-10-29/"><span
+          style="font-weight: 400;">framed</a> her crusade as &ldquo;not about me or my family&rdquo; but &ldquo;for
+      Bangladesh to achieve the future we all want.&rdquo;
     </p>
+
     <p class="story-text">
-      Yet, none of this fury appeared in her international interviews. Writing to <i>The Independent</i>, for example,
-      she said
-      she “mourns each and every child, sibling, cousin and friend we lost as a nation” and urged Bangladesh to “heal”.
-      In a simultaneous interview with the Agence France Presse, she said her priority was “the welfare and stability of
-      Bangladesh.” To Reuters, she cast her crusade as “not about me or my family” but “for Bangladesh to achieve the
-      future we all want.”
+      In the recordings reviewed, Hasina not only failed to discourage violence, but she argued for it. In a September
+      2025 call, addressing activists who appeared hesitant, she asked:
+      <span class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 11 (Dont wait).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope"> “Why wait to regain power and then take
+            revenge or get justice through the courts? When they have seized power illegally, what is there left to
+            think
+            about with them at all?”</span>
+        </span>
+
+        <audio preload="metadata"></audio>
+      </span>
     </p>
+
     <p class="story-text">
-      Rather than discouraging violence, she argued for it. In another September call, addressing activists who appeared
-      hesitant, she asked: “So why wait to regain power and then take revenge or get justice through the law? When they
-      have seized power illegally, what is there left to think about with them at all?”
+      She then took things a step further:
+      <span class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 12 (Take action-guerrilla).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“Why do you forget that Bangladesh won its freedom through guerrilla war? You
+            must take that
+            same path. Those responsible — wherever they are, however you find them — take immediate action [against
+            them].”</span>
+        </span>
+
+        <audio preload="metadata"></audio>
+      </span>
     </p>
-    <p class="story-text">
-      She then took things a step further: “Why do you forget that Bangladesh won its freedom through guerrilla war? You
-      must take that
-      same path. Those responsible — wherever they are, however you find them — take immediate action [against them].”
-    </p>
+
+
     <p class="story-text">
       In another call, Hasina was even more explicit about what she expected from her party.
     </p>
+
     <p class="story-text">
-      “The one who burns your house has his house intact — why?” she said in another call. “Why this weakness? This
-      country has been liberated through guerrilla warfare. You better remember it.”
+      <span class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 13 (Remember-guerrilla).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“The one who burns your house has his house intact — why?”</span> she asked her
+          loyalists.
+          <span class="karaoke-scope">“Why this weakness? This
+            country has been liberated through guerrilla warfare. You better remember it.”</span>
+        </span>
+
+        <audio preload="metadata"></audio>
+      </span>
     </p>
+
+
     <p class="story-text">
       When an activist promised to take up arms to kill those who had supposedly targeted fellow Awami Leaguers, Hasina
-      cut in — not to object to the violence itself, but because she thought he was overpromising. “Talk less. Those who
-      talk too much can’t get things done. So talk less, work more. Alright? Don’t say it out loud. Do it first, then
-      show that it’s been done. Alright?” she said.
+      cut in — not to object to the violence itself, but because she thought he was overpromising.
+      <span class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 17.mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">When the activist wished to kill people, she responded:
+          <span class="karaoke-scope">“Talk less. Those who
+            talk too much can’t get things done. So talk less, work more. Alright? Don’t say it out loud. Do it first,
+            then
+            show that it’s been done. Alright?”</span>
+        </span>
+
+        <audio preload="metadata"></audio>
+      </span>
     </p>
+
+
+
     <p class="story-text">
       There are signs her wishes were fulfilled.
     </p>
@@ -338,51 +504,184 @@
       and condemn it. In this case, the Awami League did not — even as the interim government accused it of stoking the
       unrest.
     </p>
+
     <p class="story-text">
-      In a speech in June, she again urged party members to wage “guerrilla warfare” against their own country.
-      “Bangladesh was liberated by guerrilla warfare. So teach them a lesson, in whatever way possible. This is my
-      order,” she said in a virtual address.
+      In a speech in June last year, she again urged party members to wage “guerrilla warfare” against their own
+      country.
+      <span class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 10 (Guerrilla-Order).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“Bangladesh was liberated through a guerrilla war. So teach them a lesson, in
+            whatever way possible. This is
+            my order,”</span> she said in a virtual address.
+
+        </span>
+
+        <audio preload="metadata"></audio>
+      </span>
+    </p>
+
+
+    <p class="story-text">
+      Netra News identified at least three separate instances in which Hasina invoked guerrilla war, and her
+      subordinates appeared to grasp her meaning.
     </p>
     <p class="story-text">
-      Netra News identified at least three separate instances in which Hasina invoked guerrilla war.
-    </p>
-    <p class="story-text">
-      Her subordinates appeared to grasp her meaning. A minister from her cabinet told Russia’s state-run RT: “Awami
-      League will launch a war like the Liberation War through which we liberated Bangladesh.”
-    </p>
-    <p class="story-text">THE AWAMI LEAGUE FACEBOOK PAGE POSTER</p>
+      A minister from her cabinet <a href="https://www.facebook.com/reel/1243093180959104" rel="nofollow">said</a> at a
+      virtual address: “If needed, the Awami League will launch a war like the
+      Liberation War through which we liberated Bangladesh.”
+      “Awami League won’t give up,” he said. “If we’re left with no other route, we will have to prepare to walk toward
+      a second liberation war.”</p>
+
+
+    <p class="story-text">A <a
+        href="https://web.archive.org/web/20260106100805/https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fawamileague.1949%2Fposts%2Fpfbid0BNZz756DvZNs6vq9Kdmw57gYgY1yTC1pSy5Mi39YAWRQ2PkEE8teDTjqnHkYAhS8l">photo</a>
+      published on the party’s official Facebook page on November 17th 2025, the day of
+      Hasina’s sentencing, echoed a similar messaging. “Crores of activists are
+      ready. There will be a war again,” the photo read.</p>
     <p class="story-text">Bangladesh’s Liberation War in 1971 was initially fought through guerilla warfare against the
       Pakistani military, with freedom fighters sheltered in neighbouring India, under the political leadership of the
       Awami League party. Today, the party — now banned in the country it helped found and operating from refuge in
       India — repeatedly invokes that history. But any attempt to replicate it would not mean a defence against foreign
       occupiers but a war on fellow Bangladeshis.</p>
 
-    <p class="story-text">On at least two occasions, Hasina also cited the Quran to justify violent revenge. In the
-      November speech, where she referred to “guerrilla warfare”, she said: “To put simply, a hand for a hand, and an
-      eye for an eye. That’s been set out in the Quran.”</p>
-    <p class="story-text">In an earlier call in October, she made the same argument. “An eye for an eye, a hand for a
-      hand — keeping in mind the Quran, you will take action with whatever you have,” she concluded.</p>
-    <p class="story-text">She also appeared, more than once, to prod the military, an institution with a steroid history
-      of coups. Recalling that tanks had once been used to kill members of her family, she questioned why they were not
-      now being used to unseat the interim government. “[The tanks] were used to kill us,” she said. “But they can’t
-      seem to use them now.”</p>
+    <p class="story-text">
+      On at least two occasions, Hasina also cited the Quran to justify violent revenge. In the
+      November 2025 speech, where she referred to “guerrilla warfare”, she said:
+      <span class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 14 (Eye for an eye).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“To put simply, a hand for a hand, and
+            an
+            eye for an eye. That’s been set out in the Quran.”</span>
+
+        </span>
+
+        <audio preload="metadata"></audio>
+      </span>
+    </p>
+
+    <p class="story-text">
+      In an earlier call in October that year, she made the same argument.
+      <span class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 14 (Eye for an eye).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“An eye for an eye, a
+            hand for a
+            hand — keeping in mind the Quran, you will take action with whatever you have,”</span> she concluded.
+
+        </span>
+
+        <audio preload="metadata"></audio>
+      </span>
+    </p>
+
+    <p class="story-text">
+      She also appeared, more than once, to prod the military, an institution with a storied history of coups.
+      <span class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 18 (Tanks full).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“Just after Bangabandhu returned, he bought tanks for the armed forces, and then I
+            did as well,”</span> she said,
+          referring to her father.
+
+          <span class="karaoke-scope">“Those apparently could only be used to kill us. Now that doesn’t happen,”</span>
+          she added, in
+          what sounded like a note of complaint.
+
+        </span>
+
+        <audio preload="metadata"></audio>
+      </span>
+    </p>
+
+
+
+
     <p class="story-text">After prosecutors at the International Crimes Tribunal — the same court that later sentenced
       her to death — charged dozens of current and former military officials over enforced disappearances and killings
       during her rule, Hasina mocked the armed forces for allowing the cases to proceed.</p>
-    <p class="story-text">“How dare they issue a warrant against these officers? I want to ask, ‘Where did they find the
-      audacity to do this?’” she asked in an address posted to Facebook on October 18th 2025.</p>
-    <p class="story-text">In another recording, she complained that the trials of these officers were unfair because
-      they had merely followed orders. “Today, 28 or 29 people from the armed forces have cases filed against them,” she
-      said. “They will be punished. Why? They have obeyed the orders from above.”</p>
-    <p class="story-text">She went on to taunt the military for tolerating the legal process. “Has the army lost its
-      strength? Can they not get them and take them away? Then they would’ve gotten an answer.”</p>
-    <p class="story-text">After Osman Hadi, the anti-Hasina student leader, was shot dead, surveillance footage released
-      by authorities suggested the involvement of individuals linked to the Awami League. Referring to the explosion of
-      protests that followed, Hasina remarked almost admittedly: “They can’t seem to bear the weight of just one death.”
-      ●</p>
 
-    <p class="specialNote">The following is a list of audio recordings reviewed as part of the investigation. Please
-      note that the transcripts — in both the original Bengali and the English translation — were automatically
+    <p class="story-text">
+      She also appeared, more than once, to prod the military, an institution with a storied history of coups.
+      <span class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 16 (Warrant).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“How dare they issue a warrant against these officers? I want to ask, ‘Where did
+            they find the
+            audacity to do this?’”</span> she asked in an address posted to Facebook on October 18th 2025.
+        </span>
+
+        <audio preload="metadata"></audio>
+      </span>
+    </p>
+
+    <p class="story-text">She went on to taunt the military for tolerating the legal process.</p>
+
+    <p class="story-text">
+      She also appeared, more than once, to prod the military, an institution with a storied history of coups.
+      <span class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 16 (Warrant).mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“Has the army lost its
+            strength? Can they not get them and take them away? Then they would’ve gotten an answer.”</span>
+        </span>
+
+        <audio preload="metadata"></audio>
+      </span>
+    </p>
+
+
+    <p class="story-text">After Sharif Osman Hadi, an anti-Hasina and anti-India student leader, was shot dead in
+      December, surveillance footage released by authorities suggested the involvement of individuals linked to the
+      Awami League, some of whom fled to India.</p>
+    <p class="story-text">She went on to taunt the military for tolerating the legal process.</p>
+
+    <p class="story-text">
+      Referring to the sudden eruption of nationwide protests and the renewed crackdown on her party that followed,
+      Hasina appeared to offer a justification for her pursuit of revenge.
+      <span class="inline-trigger audio-trigger" data-src="./assets/audio-excerpts/Call 21.mp3">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
+        </span>
+
+        <span class="highlight-text target-text">
+          <span class="karaoke-scope">“They can’t bear the weight of even a single death,”</span> she said.
+          <span class="karaoke-scope">“Have they ever thought about how brutally innumerable Awami League activists have
+            been tortured to death?”</span>
+        </span>
+
+        <audio preload="metadata"></audio>
+      </span>●
+    </p>
+
+    <p class="specialNote">The following is a list of audio recordings reviewed as part of the investigation. Note that
+      the transcripts — in both the original Bengali and the English translation — were automatically
       generated using Google’s PinPoint and Translate tools. As such, they may contain errors and may not fully
       correspond to the human-transcribed and translated excerpts used in the story.</p>
 
@@ -503,34 +802,48 @@
       }
 
       function setupKaraoke(targetEl) {
-        if (targetEl.dataset.setup) return targetEl.querySelectorAll('.karaoke-word');
+        // If already processed, return all karaoke words inside scopes
+        if (targetEl.dataset.setup) return Array.from(targetEl.querySelectorAll('.karaoke-scope .karaoke-word'));
 
-        // Preserve explicit <br> in your HTML (innerText flattens it)
-        const raw = targetEl.innerHTML.replace(/<br\s*\/?>/gi, ' \n ');
-        const words = raw
-          .replace(/&nbsp;/g, ' ')
-          .split(/\s+/)
-          .filter(Boolean);
+        const scopes = Array.from(targetEl.querySelectorAll('.karaoke-scope'));
+        if (!scopes.length) {
+          // Fallback: old behaviour (entire target becomes karaoke)
+          const rawText = targetEl.innerText;
+          targetEl.innerHTML = '';
+          const words = rawText.split(/\s+/).filter(Boolean);
+          const spans = [];
+          words.forEach(word => {
+            const span = document.createElement('span');
+            span.textContent = word;
+            span.classList.add('karaoke-word');
+            targetEl.appendChild(span);
+            targetEl.appendChild(document.createTextNode(' '));
+            spans.push(span);
+          });
+          targetEl.dataset.setup = 'true';
+          return spans;
+        }
 
-        targetEl.innerHTML = '';
-        const spans = [];
-
-        words.forEach((w) => {
-          if (w === '\n') {
-            targetEl.appendChild(document.createElement('br'));
-            return;
-          }
-          const s = document.createElement('span');
-          s.className = 'karaoke-word';
-          s.textContent = w;
-          targetEl.appendChild(s);
-          targetEl.appendChild(document.createTextNode(' '));
-          spans.push(s);
+        // New behaviour: only process each .karaoke-scope
+        const all = [];
+        scopes.forEach(scope => {
+          const raw = scope.innerText;
+          scope.innerHTML = '';
+          const words = raw.split(/\s+/).filter(Boolean);
+          words.forEach(word => {
+            const span = document.createElement('span');
+            span.textContent = word;
+            span.classList.add('karaoke-word');
+            scope.appendChild(span);
+            scope.appendChild(document.createTextNode(' '));
+            all.push(span);
+          });
         });
 
         targetEl.dataset.setup = 'true';
-        return spans;
+        return all;
       }
+
 
       const sections = Array.from(document.querySelectorAll('.audio-trigger'));
 
@@ -593,112 +906,280 @@
   </script>
 
   <script>
-    // ===== Telegram-style call UI (JS) =====
-    // - Video button is aesthetics-only (not wired)
-    // - Mute + End buttons both pause audio
-    // - Transcript “subtitle progress”: highlights words as audio plays
+
+
     (function initTelegramCallUI() {
       const root = document.querySelector("[data-call]");
       if (!root) return;
+
       const audio = root.querySelector("[data-audio]");
       const transcriptEl = root.querySelector("[data-transcript]");
       const btnMute = root.querySelector("[data-mute]");
       const btnEnd = root.querySelector("[data-end]");
-      // ---- Provide your real transcript segments here ----
-      // Each segment: { start: seconds, end: seconds, text: "..." }
-      // Tip: keep segments short (1–4 seconds) for nicer “subtitle” feel.
-      const segments = [
-        { start: 0.00, end: 3.80, text: "The punishment for one and the punishment for" },
-        { start: 3.80, end: 7.60, text: "two hundred and a quarter are the same." },
-        { start: 7.60, end: 10.40, text: "All right, I will take that." },
-        { start: 10.40, end: 14.40, text: "But I don’t want to talk now because" }
-      ];
-      // Render transcript as word spans
-      function render() {
-        transcriptEl.innerHTML = "";
-        segments.forEach((seg, idx) => {
-          const line = document.createElement("span");
-          line.className = "tg-line";
-          line.dataset.idx = String(idx);
-          const words = seg.text.split(/(\s+)/); // keep spaces as tokens
-          words.forEach(tok => {
-            if (/^\s+$/.test(tok)) {
-              line.appendChild(document.createTextNode(tok));
-              return;
-            }
-            const w = document.createElement("span");
-            w.className = "w";
-            w.textContent = tok;
-            line.appendChild(w);
-          });
-          transcriptEl.appendChild(line);
-          // spacing between segments (kept subtle, like the reference’s wrap)
-          transcriptEl.appendChild(document.createTextNode(" "));
-        });
+
+      // Map speaker name -> tile element
+      const speakerTiles = new Map();
+      root.querySelectorAll("[data-speaker]").forEach(el => {
+        speakerTiles.set(el.getAttribute("data-speaker"), el);
+      });
+
+      // Cache the original mini-tile state so we can restore after swaps
+      const primaryDefault = {
+        name: "Sheikh Hasina",
+        abbr: "SH"
+      };
+
+      const miniDefaults = {
+        "Follower 1": { abbr: "F1" },
+        "Follower 2": { abbr: "F2" },
+        "Follower 3": { abbr: "F3" }
+      };
+
+      // Capture original labels from the DOM (so it stays robust if you rename later)
+      Object.keys(miniDefaults).forEach(k => {
+        const el = speakerTiles.get(k);
+        if (!el) return;
+        const nameEl = el.querySelector(".tg-mini-name");
+        const avatarEl = el.querySelector(".tg-mini-avatar");
+        miniDefaults[k].nameEl = nameEl;
+        miniDefaults[k].avatarEl = avatarEl;
+        miniDefaults[k].name = nameEl ? nameEl.textContent.trim() : k;
+        miniDefaults[k].abbr = avatarEl ? avatarEl.textContent.trim() : miniDefaults[k].abbr;
+      });
+
+      // Helpers for updating tiles
+      function setPrimary(label) {
+        const nameEl = root.querySelector(".tg-tile--primary .tg-tile__name");
+        const lettersEl = root.querySelector(".tg-tile--primary .tg-avatar__letters");
+        if (nameEl) nameEl.textContent = label;
+
+        const abbr =
+          label === "Sheikh Hasina" ? "SH" :
+            label === "Follower 1" ? "F1" :
+              label === "Follower 2" ? "F2" :
+                label === "Follower 3" ? "F3" :
+                  label.split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase();
+
+        if (lettersEl) lettersEl.textContent = abbr;
+
+        const primary = root.querySelector(".tg-tile--primary");
+        if (primary) {
+          primary.classList.add("is-speaking");
+          primary.setAttribute("aria-label", `Active speaker ${label}`);
+        }
       }
+
+      function setMini(label, name, abbr) {
+        const d = miniDefaults[label];
+        if (!d) return;
+        if (d.nameEl) d.nameEl.textContent = name;
+        if (d.avatarEl) d.avatarEl.textContent = abbr;
+      }
+
+
+      // Your timestamped segments (you can keep your array, just split speaker+text)
+      const segmentsRaw = [
+        { start: 0.0, end: 6.0, text: "Follower 1: Leader, they killed our brothers and sisters. We shall also take up arms and kill them in the future, inshallah (God willing)." },
+        { start: 6.0, end: 13.0, text: "Sheikh Hasina: Talk less. Those who talk too much can’t get things done. So talk less, work more. Alright?" },
+        { start: 13.0, end: 14.0, text: "Follower 2: Yes. (in loud agreement)" },
+        { start: 14.0, end: 18.0, text: "Sheikh Hasina: Don’t say it out loud. Do it first, then show that it’s been done. Alright? Khoda Hafez (may God save you)." },
+        { start: 18.0, end: 20.0, text: "Follower 3: Yes, as-salamu alaikum (peace be upon you)." }
+      ];
+
+
+      function splitSpeaker(line) {
+        const m = String(line || "").match(/^\s*([^:]+)\s*:\s*(.*)\s*$/);
+        if (!m) return { speaker: "Sheikh Hasina", body: String(line || "") };
+        return { speaker: m[1].trim(), body: m[2].trim() };
+      }
+
+      const segments = segmentsRaw
+        .map(s => {
+          const { speaker, body } = splitSpeaker(s.text);
+          return { start: s.start, end: s.end, speaker, body };
+        })
+        .sort((a, b) => a.start - b.start);
+
+      let activeIdx = -1;
+      let wordSpans = [];
+
       function setPausedUI(paused) {
         root.classList.toggle("is-paused", paused);
         root.classList.toggle("is-playing", !paused);
       }
+
       function pauseAudio() {
         if (!audio) return;
         audio.pause();
         setPausedUI(true);
       }
-      // Word-level highlighting within the active segment
-      function updateTranscript(t) {
-        // find active segment
-        let activeIdx = -1;
-        for (let i = 0; i < segments.length; i++) {
-          if (t >= segments[i].start && t < segments[i].end) { activeIdx = i; break; }
-        }
-        const lines = transcriptEl.querySelectorAll(".tg-line");
-        lines.forEach(line => {
-          const idx = Number(line.dataset.idx);
-          line.classList.toggle("is-active", idx === activeIdx);
-          line.classList.toggle("is-done", idx < activeIdx && activeIdx !== -1);
-          if (activeIdx === -1) line.classList.remove("is-done");
+
+
+
+      function setActiveSpeaker(name) {
+  const norm = (s) => String(s || "").trim().toLowerCase().replace(/\s+/g, " ");
+  const speaker = norm(name);
+
+  // Clear primary speaking state
+  const primary = root.querySelector(".tg-tile--primary");
+  if (!primary) return;
+  primary.classList.remove("is-speaking");
+
+  // Restore all mini tiles to their original selves first
+  setMini("Follower 1", miniDefaults["Follower 1"].name, miniDefaults["Follower 1"].abbr);
+  setMini("Follower 2", miniDefaults["Follower 2"].name, miniDefaults["Follower 2"].abbr);
+  setMini("Follower 3", miniDefaults["Follower 3"].name, miniDefaults["Follower 3"].abbr);
+
+  // If Hasina is speaking: primary = SH, minis stay F1/F2/F3
+  if (speaker === norm("Sheikh Hasina")) {
+    setPrimary("Sheikh Hasina");
+    return;
+  }
+
+  // Otherwise, follower speaks: put follower in primary…
+  // …and put SH into that follower's mini slot
+  const followerKeys = ["Follower 1", "Follower 2", "Follower 3"];
+  const activeFollower = followerKeys.find(k => norm(k) === speaker);
+
+  if (!activeFollower) {
+    // Unknown speaker label: fall back to showing them in primary
+    setPrimary(name);
+    return;
+  }
+
+  // Active follower takes the primary tile
+  setPrimary(activeFollower);
+
+  // SH takes the active follower's mini slot
+  setMini(activeFollower, primaryDefault.name, primaryDefault.abbr);
+}
+
+
+
+
+      function renderSegmentOnly(idx) {
+        transcriptEl.innerHTML = "";
+        wordSpans = [];
+
+        if (idx < 0 || idx >= segments.length) return;
+
+        const seg = segments[idx];
+
+        // Line container
+        const line = document.createElement("div");
+        line.className = "tg-line is-active";
+
+        // Optional speaker label (small, like Telegram)
+        const label = document.createElement("span");
+        label.className = "tg-speaker";
+        label.textContent = seg.speaker + ": ";
+        line.appendChild(label);
+
+        // Word spans for highlighting
+        const tokens = seg.body.split(/(\s+)/);
+        tokens.forEach(tok => {
+          if (/^\s+$/.test(tok)) {
+            line.appendChild(document.createTextNode(tok));
+            return;
+          }
+          const w = document.createElement("span");
+          w.className = "w";
+          w.textContent = tok;
+          line.appendChild(w);
+          wordSpans.push(w);
         });
+
+        transcriptEl.appendChild(line);
+
+        // Ensure we start scrolled at top for each segment
+        transcriptEl.scrollTop = 0;
+      }
+
+      function findActiveIdx(t) {
+        for (let i = 0; i < segments.length; i++) {
+          if (t >= segments[i].start && t < segments[i].end) return i;
+        }
+        return -1;
+      }
+
+      function updateTranscript(t) {
+        const idx = findActiveIdx(t);
+
+        // If segment changed: swap speaker + rerender transcript to only that line
+        if (idx !== activeIdx) {
+          activeIdx = idx;
+          if (activeIdx === -1) {
+            transcriptEl.innerHTML = "";
+            wordSpans = [];
+            return;
+          }
+          setActiveSpeaker(segments[activeIdx].speaker);
+          renderSegmentOnly(activeIdx);
+        }
+
         if (activeIdx === -1) return;
+
         const seg = segments[activeIdx];
-        const progress = Math.max(0, Math.min(1, (t - seg.start) / (seg.end - seg.start)));
-        const activeLine = transcriptEl.querySelector(`.tg-line[data-idx="${activeIdx}"]`);
-        if (!activeLine) return;
-        const wordSpans = Array.from(activeLine.querySelectorAll(".w"));
-        const wordCount = wordSpans.length;
-        if (!wordCount) return;
-        const spokenCount = Math.floor(progress * wordCount);
-        const currentIndex = Math.min(wordCount - 1, spokenCount);
+        const denom = (seg.end - seg.start) || 1;
+        const progress = Math.max(0, Math.min(1, (t - seg.start) / denom));
+
+        const count = wordSpans.length;
+        if (!count) return;
+
+        const spokenCount = Math.floor(progress * count);
+        const currentIndex = Math.min(count - 1, spokenCount);
+
         wordSpans.forEach((w, i) => {
           w.classList.toggle("is-spoken", i < spokenCount);
           w.classList.toggle("is-current", i === currentIndex);
         });
-        // keep active bit in view
-        const rect = activeLine.getBoundingClientRect();
-        const parentRect = transcriptEl.getBoundingClientRect();
-        if (rect.bottom > parentRect.bottom - 24) {
-          transcriptEl.scrollTop += (rect.bottom - parentRect.bottom) + 24;
-        }
       }
-      // Controls:
-      // - Mute pauses
-      // - End pauses
-      // (Optionally: clicking transcript could toggle play, but not requested)
-      btnMute?.addEventListener("click", pauseAudio);
-      btnEnd?.addEventListener("click", pauseAudio);
-      // Auto-init states
-      render();
+
+      // Controls
+      btnMute?.addEventListener("click", () => {
+        if (!audio) return;
+        if (audio.paused) {
+          audio.play().catch(() => { });
+        } else {
+          audio.pause();
+        }
+      });
+
+      btnEnd?.addEventListener("click", () => {
+        if (!audio) return;
+        audio.pause();
+        audio.currentTime = 0;
+
+        // reset UI
+        setPausedUI(true);
+        activeIdx = -1;
+        transcriptEl.innerHTML = "";
+        wordSpans = [];
+
+        // reset primary speaker label
+        setActiveSpeaker("Sheikh Hasina");
+      });
+
+
+      // Init
       setPausedUI(true);
-      // If you want autoplay, uncomment:
-      // audio.play().then(()=>setPausedUI(false)).catch(()=>setPausedUI(true));
-      audio?.addEventListener("play", () => setPausedUI(false));
-      audio?.addEventListener("pause", () => setPausedUI(true));
+      transcriptEl.innerHTML = ""; // start empty
+      setActiveSpeaker("Sheikh Hasina"); // initial label
+
+      audio?.addEventListener("play", () => {
+        setPausedUI(false);
+        updateTranscript(audio.currentTime); // <-- add
+      }); audio?.addEventListener("pause", () => setPausedUI(true));
       audio?.addEventListener("timeupdate", () => updateTranscript(audio.currentTime));
-      // If user scrubs (native controls hidden), update transcript immediately
       audio?.addEventListener("seeked", () => updateTranscript(audio.currentTime));
-      // On end, pause UI
-      audio?.addEventListener("ended", () => setPausedUI(true));
+      audio?.addEventListener("ended", () => {
+        setPausedUI(true);
+        activeIdx = -1;
+        transcriptEl.innerHTML = "";
+        wordSpans = [];
+      });
     })();
+
   </script>
 
 
@@ -1105,7 +1586,9 @@
         if (timebar) timebar.textContent = formatTime(elAudio.currentTime);
       });
 
-      elAudio.addEventListener("loadedmetadata", () => render());
+      audio?.addEventListener("loadedmetadata", () => {
+        updateTranscript(audio.currentTime); // <-- add
+      });
       elAudio.addEventListener("play", () => render());
       elAudio.addEventListener("pause", () => render());
       elAudio.addEventListener("ended", () => render());
