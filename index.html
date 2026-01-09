@@ -96,27 +96,29 @@
     </p>
     <div class="story-text">
 
-      <div class="inline-trigger audio-trigger" onclick="this.classList.toggle('playing')">
+      <div class="inline-trigger audio-trigger"
+        data-src="./assets/audio/AL men will be compensated with Yunus' supporters properties.mp3">
         <span class="inline-icon" aria-hidden="true">
           <span class="icon icon-play"></span>
           <span class="icon icon-pause"></span>
         </span>
 
-
-        <span class="highlight-text">
-          <span class="karaoke-word">“I will settle the score one by one,”</span>
-          she said in one call.
-          <span class="karaoke-word">“They will harm my activists time and again – and will I just stand by and watch?
-            No.”</span>
+        <span class="highlight-text target-text">
+          “I will settle the score one by one,” she said in one call.
+          “They will harm my activists time and again – and will I just stand by and watch? No.”
           <br>
-          <span class="karaoke-word">“I’ll clean it out this time,”</span>
-          she added.
-          <span class="karaoke-word">“My aim now is to clear away the filth.”</span>
+          “I’ll clean it out this time,” she added.
+          “My aim now is to clear away the filth.”
         </span>
+
+        <audio preload="metadata"></audio>
       </div>
 
 
+
     </div>
+
+
     <p class="story-text">
       Netra News reviewed more than two dozen of the call recordings, which show a leader who sounds embittered,
       aggrieved and
@@ -379,6 +381,10 @@
       protests that followed, Hasina remarked almost admittedly: “They can’t seem to bear the weight of just one death.”
       ●</p>
 
+    <p class="specialNote">The following is a list of audio recordings reviewed as part of the investigation. Please
+      note that the transcripts — in both the original Bengali and the English translation — were automatically
+      generated using Google’s PinPoint and Translate tools. As such, they may contain errors and may not fully
+      correspond to the human-transcribed and translated excerpts used in the story.</p>
 
     <div class="rc-player" id="rcPlayer">
       <div class="rc-list" id="rcList" aria-label="Audio playlist">
@@ -483,60 +489,74 @@
 
 
   <script>
+
     document.addEventListener('DOMContentLoaded', () => {
       const body = document.body;
+
+      // Optional global mute (kept tiny + safe)
       const muteBtn = document.getElementById('global-mute-btn');
-
-      muteBtn.addEventListener('click', () => {
-        const isMuted = body.classList.toggle('is-muted');
-        document.querySelectorAll('audio').forEach(audio => {
-          audio.muted = isMuted;
+      if (muteBtn) {
+        muteBtn.addEventListener('click', () => {
+          const isMuted = body.classList.toggle('is-muted');
+          document.querySelectorAll('.audio-trigger audio').forEach(a => (a.muted = isMuted));
         });
-      });
-
-      document.querySelectorAll('.waveform-container').forEach(container => {
-        for (let i = 0; i < 35; i++) {
-          const bar = document.createElement('div');
-          bar.classList.add('bar');
-          let h = 20 + Math.random() * 60;
-          bar.style.height = `${h}%`;
-          bar.style.animationDelay = `-${Math.random()}s`;
-          container.appendChild(bar);
-        }
-      });
+      }
 
       function setupKaraoke(targetEl) {
         if (targetEl.dataset.setup) return targetEl.querySelectorAll('.karaoke-word');
-        const rawText = targetEl.innerText;
+
+        // Preserve explicit <br> in your HTML (innerText flattens it)
+        const raw = targetEl.innerHTML.replace(/<br\s*\/?>/gi, ' \n ');
+        const words = raw
+          .replace(/&nbsp;/g, ' ')
+          .split(/\s+/)
+          .filter(Boolean);
+
         targetEl.innerHTML = '';
-        const words = rawText.split(' ');
         const spans = [];
-        words.forEach(word => {
-          const span = document.createElement('span');
-          span.innerText = word;
-          span.classList.add('karaoke-word');
-          targetEl.appendChild(span);
+
+        words.forEach((w) => {
+          if (w === '\n') {
+            targetEl.appendChild(document.createElement('br'));
+            return;
+          }
+          const s = document.createElement('span');
+          s.className = 'karaoke-word';
+          s.textContent = w;
+          targetEl.appendChild(s);
           targetEl.appendChild(document.createTextNode(' '));
-          spans.push(span);
+          spans.push(s);
         });
+
         targetEl.dataset.setup = 'true';
         return spans;
       }
 
-      document.querySelectorAll('.audio-trigger').forEach(section => {
+      const sections = Array.from(document.querySelectorAll('.audio-trigger'));
+
+      sections.forEach(section => {
         const targetText = section.querySelector('.target-text');
         const audio = section.querySelector('audio');
         if (!targetText || !audio) return;
 
+        // Bind audio in HTML
+        if (section.dataset.src) audio.src = section.dataset.src;
+        audio.muted = body.classList.contains('is-muted');
+
         const wordSpans = setupKaraoke(targetText);
 
         section.addEventListener('click', (e) => {
-          // Prevent double-toggling: ignore clicks that come from inline onclick above
-          // (Best fix is to remove the inline onclick attribute entirely.)
+          if (e.target.closest('a, button')) return;
+
           if (audio.paused) {
-            document.querySelectorAll('audio').forEach(a => { if (a !== audio) a.pause(); });
-            document.querySelectorAll('.audio-trigger').forEach(s => s.classList.remove('playing'));
-            audio.play();
+            sections.forEach(s => {
+              if (s !== section) {
+                s.classList.remove('playing');
+                const a = s.querySelector('audio');
+                if (a && !a.paused) a.pause();
+              }
+            });
+            audio.play().catch(() => { });
             section.classList.add('playing');
           } else {
             audio.pause();
@@ -545,49 +565,30 @@
         });
 
         audio.addEventListener('timeupdate', () => {
-          if (!audio.duration) return;
-          const percent = audio.currentTime / audio.duration;
-          const wordIndex = Math.floor(percent * wordSpans.length);
-          wordSpans.forEach((span, idx) => {
-            span.classList.toggle('active', idx <= wordIndex);
-          });
+          const d = audio.duration;
+          if (!isFinite(d) || d <= 0) return;
+          const idx = Math.floor((audio.currentTime / d) * wordSpans.length);
+          wordSpans.forEach((s, i) => s.classList.toggle('active', i <= idx));
         });
 
-        audio.addEventListener('ended', () => {
-          section.classList.remove('playing');
-          wordSpans.forEach(span => span.classList.add('active'));
-        });
+        audio.addEventListener('pause', () => section.classList.remove('playing'));
+        audio.addEventListener('ended', () => section.classList.remove('playing'));
       });
 
+      // Optional auto-pause when offscreen (kept)
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          const section = entry.target.closest('.audio-trigger');
-          if (!section) return;
+          if (entry.isIntersecting) return;
+          const section = entry.target;
           const audio = section.querySelector('audio');
-
-          if (!audio.src && section.dataset.src) audio.src = section.dataset.src;
-          audio.muted = body.classList.contains('is-muted');
-
-          if (!entry.isIntersecting) {
-            section.classList.remove('playing');
-            if (!audio.paused) audio.pause();
-          }
+          section.classList.remove('playing');
+          if (audio && !audio.paused) audio.pause();
         });
       }, { threshold: 0.6 });
 
-      document.querySelectorAll('.audio-trigger').forEach(s => observer.observe(s));
-
-      const redactionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add('revealed'), 200);
-            redactionObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 1.0, rootMargin: "0px 0px -50px 0px" });
-
-      document.querySelectorAll('.redacted-reveal').forEach(el => redactionObserver.observe(el));
+      sections.forEach(s => observer.observe(s));
     });
+
 
   </script>
 
@@ -723,6 +724,7 @@
       let activeIndex = -1;
       let visibleCount = 4;
       let currentSegIndex = -1;
+      let userInteracted = false;
 
       const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
@@ -974,8 +976,11 @@
 
         render();
 
-        const elItem = elList.querySelector(`.rc-item[data-idx="${activeIndex}"]`);
-        if (elItem) elItem.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        if (userInteracted) {
+          const elItem = elList.querySelector(`.rc-item[data-idx="${activeIndex}"]`);
+          if (elItem) elItem.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        }
+
 
         if (autoplay) {
           elAudio.play().catch(() => { });
@@ -1081,6 +1086,11 @@
           return;
         }
       });
+
+      elRoot.addEventListener("pointerdown", () => {
+        userInteracted = true;
+      }, { once: true });
+
 
       elMore.addEventListener("click", () => {
         visibleCount = Math.min(rows.length, visibleCount + 6);

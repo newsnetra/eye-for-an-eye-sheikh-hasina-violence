@@ -170,9 +170,9 @@ h2,
 }
 
 h2 {
-    margin: auto;
+    margin: 0 auto 18px auto;
     max-width: 618px;
-    font-size: 20px;
+    font-size: 2.5rem;
 }
 
 .hero__dek {
@@ -558,95 +558,73 @@ p {
 /* 2. INLINE PLAYER CONTAINER
        ========================================= */
 
-.inline-trigger {
-    cursor: pointer;
-    display: inline;
-    background: transparent;
-    transition: all 0.2s ease;
+       .inline-trigger {
+  cursor: pointer;
+  display: inline;
 }
 
+/* Icon container (keeps your grid bg) */
 .inline-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 25px;
-    height: 25px;
-    margin-right: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  margin-right: 6px;
 
-    /* Grid background */
-    background-image:
-        linear-gradient(to right, rgba(0, 0, 0, 0.12) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.12) 1px, transparent 1px);
-    background-size: 10px 10px;
-
-    transition: all 0.2s;
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.12) 1px, transparent 1px);
+  background-size: 10px 10px;
 }
 
-/* MASK ICONS (external SVGs, colour via background-color) */
+/* Mask icons (external SVGs, coloured via background-color) */
 .inline-icon .icon {
-    width: 15px;
-    height: 15px;
-    display: block;
-    background-color: #d94c3f;
+  width: 15px;
+  height: 15px;
+  display: block;
+  background-color: #d94c3f;
 
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    -webkit-mask-size: contain;
-    mask-repeat: no-repeat;
-    mask-position: center;
-    mask-size: contain;
+  -webkit-mask: no-repeat center / contain;
+  mask: no-repeat center / contain;
 }
 
 .inline-icon .icon-play {
-    -webkit-mask-image: url("./assets/icons/play.svg");
-    mask-image: url("./assets/icons/play.svg");
-    display: block;
+  -webkit-mask-image: url("./assets/icons/play.svg");
+  mask-image: url("./assets/icons/play.svg");
 }
 
 .inline-icon .icon-pause {
-    -webkit-mask-image: url("./assets/icons/pause.svg");
-    mask-image: url("./assets/icons/pause.svg");
-    display: none;
+  -webkit-mask-image: url("./assets/icons/pause.svg");
+  mask-image: url("./assets/icons/pause.svg");
+  display: none;
 }
 
-/* Toggle play/pause */
-.inline-trigger.playing .icon-play {
-    display: none;
-}
+/* Toggle */
+.inline-trigger.playing .icon-play { display: none; }
+.inline-trigger.playing .icon-pause { display: block; }
 
-.inline-trigger.playing .icon-pause {
-    display: block;
-}
-
-.highlight-text {
-    color: var(--text-color);
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-    font-weight: 400;
-    transition: background-color 0.2s;
-}
-
-.inline-trigger:hover .highlight-text {
-    background-color: transparent;
-}
-
-.karaoke-word {
-    transition: color 0.2s ease;
-    background-color: var(--bg);
-    font-family: var(--mono);
-    font-size: 20px;
-}
-
+/* Text + karaoke */
+.highlight-text { color: var(--text-color); }
+.karaoke-word { font-family: var(--mono); font-size: 20px; }
 .karaoke-word.active {
-    color: var(--text-color);
-    font-weight: 700;
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
 }
+
 
 
 /* 3. FOOTER
        ========================================= */
+
+
+.specialNote {
+    font-family: var(--mono);
+    color: var(--accent);
+    font-size: small;
+}
+
 
 footer {
     background: var(--accent);
