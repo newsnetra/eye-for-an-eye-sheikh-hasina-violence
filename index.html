@@ -95,15 +95,14 @@
       loyalists, she demanded “an eye for an eye”, even invoking Quranic verses to justify her incitement.
     </p>
     <div class="story-text">
-      <div class="inline-trigger" onclick="this.classList.toggle('playing')">
-        <span class="inline-icon">
-          <svg class="icon-play" viewBox="0 0 12 14">
-            <path d="M0 0L12 7L0 14V0Z" />
-          </svg>
-          <svg class="icon-pause" viewBox="0 0 12 14">
-            <path d="M0 0H4V14H0V0ZM8 0H12V14H8V0Z" />
-          </svg>
+
+      <div class="inline-trigger audio-trigger" onclick="this.classList.toggle('playing')">
+        <span class="inline-icon" aria-hidden="true">
+          <span class="icon icon-play"></span>
+          <span class="icon icon-pause"></span>
         </span>
+
+
         <span class="highlight-text">
           <span class="karaoke-word">“I will settle the score one by one,”</span>
           she said in one call.
@@ -115,9 +114,12 @@
           <span class="karaoke-word">“My aim now is to clear away the filth.”</span>
         </span>
       </div>
+
+
     </div>
     <p class="story-text">
-      Netra News reviewed more than two dozen of the call recordings, which show a leader who sounds embittered, aggrieved and
+      Netra News reviewed more than two dozen of the call recordings, which show a leader who sounds embittered,
+      aggrieved and
       increasingly desperate, casting herself as a victim entitled to retribution. Circulated openly in short clips for
       more than a year among
       Awami League supporters, the recordings amounted to unambiguous calls for violence. What is striking is not only
@@ -378,23 +380,24 @@
       ●</p>
 
 
-<div class="rc-player" id="rcPlayer">
-  <div class="rc-list" id="rcList" aria-label="Audio playlist">
-    <div class="rc-listbar">
-      <div class="rc-lang" role="tablist" aria-label="Subtitle language">
-        <button class="rc-lang-btn" data-lang="bn" role="tab" aria-selected="false" type="button">বা</button>
-        <button class="rc-lang-btn is-active" data-lang="en" role="tab" aria-selected="true" type="button">En</button>
+    <div class="rc-player" id="rcPlayer">
+      <div class="rc-list" id="rcList" aria-label="Audio playlist">
+        <div class="rc-listbar">
+          <div class="rc-lang" role="tablist" aria-label="Subtitle language">
+            <button class="rc-lang-btn" data-lang="bn" role="tab" aria-selected="false" type="button">বা</button>
+            <button class="rc-lang-btn is-active" data-lang="en" role="tab" aria-selected="true"
+              type="button">En</button>
+          </div>
+        </div>
       </div>
+
+      <div class="rc-footer">
+        <button class="rc-more" id="rcMore" type="button">Show more</button>
+      </div>
+
+      <!-- Single shared audio element -->
+      <audio id="rcAudio" preload="metadata"></audio>
     </div>
-  </div>
-
-  <div class="rc-footer">
-    <button class="rc-more" id="rcMore" type="button">Show more</button>
-  </div>
-
-  <!-- Single shared audio element -->
-  <audio id="rcAudio" preload="metadata"></audio>
-</div>
 
 
 
@@ -474,36 +477,23 @@
       </div>
     </div>
   </footer>
-  <button id="global-mute-btn" class="global-mute-btn">
-    <span class="state-muted">
-      <svg viewBox="0 0 24 24">
-        <path
-          d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z">
-        </path>
-      </svg>
-      UNMUTE
-    </span>
-    <span class="state-unmuted">
-      <svg viewBox="0 0 24 24">
-        <path
-          d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z">
-        </path>
-      </svg>
-      MUTE
-    </span>
-  </button>
+
+
+
+
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const body = document.body;
       const muteBtn = document.getElementById('global-mute-btn');
-      // 1. MUTE TOGGLE
+
       muteBtn.addEventListener('click', () => {
         const isMuted = body.classList.toggle('is-muted');
         document.querySelectorAll('audio').forEach(audio => {
           audio.muted = isMuted;
         });
       });
-      // 2. GENERATE VISUALIZER BARS
+
       document.querySelectorAll('.waveform-container').forEach(container => {
         for (let i = 0; i < 35; i++) {
           const bar = document.createElement('div');
@@ -514,7 +504,7 @@
           container.appendChild(bar);
         }
       });
-      // 3. WORD-BY-WORD HIGHLIGHTING HELPER
+
       function setupKaraoke(targetEl) {
         if (targetEl.dataset.setup) return targetEl.querySelectorAll('.karaoke-word');
         const rawText = targetEl.innerText;
@@ -532,13 +522,17 @@
         targetEl.dataset.setup = 'true';
         return spans;
       }
-      // 4. LOGIC BINDING
+
       document.querySelectorAll('.audio-trigger').forEach(section => {
         const targetText = section.querySelector('.target-text');
         const audio = section.querySelector('audio');
         if (!targetText || !audio) return;
+
         const wordSpans = setupKaraoke(targetText);
+
         section.addEventListener('click', (e) => {
+          // Prevent double-toggling: ignore clicks that come from inline onclick above
+          // (Best fix is to remove the inline onclick attribute entirely.)
           if (audio.paused) {
             document.querySelectorAll('audio').forEach(a => { if (a !== audio) a.pause(); });
             document.querySelectorAll('.audio-trigger').forEach(s => s.classList.remove('playing'));
@@ -549,56 +543,54 @@
             section.classList.remove('playing');
           }
         });
+
         audio.addEventListener('timeupdate', () => {
           if (!audio.duration) return;
           const percent = audio.currentTime / audio.duration;
           const wordIndex = Math.floor(percent * wordSpans.length);
           wordSpans.forEach((span, idx) => {
-            if (idx <= wordIndex) {
-              span.classList.add('active');
-            } else {
-              span.classList.remove('active');
-            }
+            span.classList.toggle('active', idx <= wordIndex);
           });
         });
+
         audio.addEventListener('ended', () => {
           section.classList.remove('playing');
           wordSpans.forEach(span => span.classList.add('active'));
         });
       });
-      // 5. OBSERVER (Auto-pause)
+
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           const section = entry.target.closest('.audio-trigger');
           if (!section) return;
           const audio = section.querySelector('audio');
-          if (!audio.src && section.dataset.src) {
-            audio.src = section.dataset.src;
-          }
+
+          if (!audio.src && section.dataset.src) audio.src = section.dataset.src;
           audio.muted = body.classList.contains('is-muted');
+
           if (!entry.isIntersecting) {
             section.classList.remove('playing');
             if (!audio.paused) audio.pause();
           }
         });
       }, { threshold: 0.6 });
+
       document.querySelectorAll('.audio-trigger').forEach(s => observer.observe(s));
-      // 6. REDACTED REVEAL OBSERVER
+
       const redactionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            setTimeout(() => {
-              entry.target.classList.add('revealed');
-            }, 200);
+            setTimeout(() => entry.target.classList.add('revealed'), 200);
             redactionObserver.unobserve(entry.target);
           }
         });
       }, { threshold: 1.0, rootMargin: "0px 0px -50px 0px" });
-      document.querySelectorAll('.redacted-reveal').forEach(el => {
-        redactionObserver.observe(el);
-      });
+
+      document.querySelectorAll('.redacted-reveal').forEach(el => redactionObserver.observe(el));
     });
+
   </script>
+
   <script>
     // ===== Telegram-style call UI (JS) =====
     // - Video button is aesthetics-only (not wired)
@@ -710,212 +702,212 @@
 
 
 
-<script>
-(() => {
-  const CSV_URL = "recording_collections.csv";
-  const AUDIO_DIR = "assets/audio/";
-  const ICON_DIR  = "assets/icons/";
-  const ICONS = {
-    play:  ICON_DIR + "play.svg",
-    pause: ICON_DIR + "pause.svg",
-    stop:  ICON_DIR + "pause.svg",
-  };
+  <script>
+    (() => {
+      const CSV_URL = "recording_collections.csv";
+      const AUDIO_DIR = "assets/audio/";
+      const ICON_DIR = "assets/icons/";
+      const ICONS = {
+        play: ICON_DIR + "play.svg",
+        pause: ICON_DIR + "pause.svg",
+        stop: ICON_DIR + "pause.svg",
+      };
 
-  const elRoot  = document.getElementById("rcPlayer");
-  const elList  = document.getElementById("rcList");
-  const elAudio = document.getElementById("rcAudio");
-  const elMore  = document.getElementById("rcMore");
+      const elRoot = document.getElementById("rcPlayer");
+      const elList = document.getElementById("rcList");
+      const elAudio = document.getElementById("rcAudio");
+      const elMore = document.getElementById("rcMore");
 
-  let rows = [];
-  let lang = "en";              // default language is EN
-  let activeIndex = -1;
-  let visibleCount = 4;
-  let currentSegIndex = -1;
+      let rows = [];
+      let lang = "en";              // default language is EN
+      let activeIndex = -1;
+      let visibleCount = 4;
+      let currentSegIndex = -1;
 
-  const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+      const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
-  function parseTimestampToSeconds(ts){
-    if (ts == null) return null;
-    const s = String(ts).trim();
-    if (!s) return null;
-    const parts = s.split(":").map(p => p.trim());
-    if (parts.some(p => p === "" || isNaN(Number(p)))) return null;
+      function parseTimestampToSeconds(ts) {
+        if (ts == null) return null;
+        const s = String(ts).trim();
+        if (!s) return null;
+        const parts = s.split(":").map(p => p.trim());
+        if (parts.some(p => p === "" || isNaN(Number(p)))) return null;
 
-    let sec = 0;
-    if (parts.length === 1) sec = Number(parts[0]);
-    else if (parts.length === 2) sec = Number(parts[0]) * 60 + Number(parts[1]);
-    else if (parts.length === 3) sec = Number(parts[0]) * 3600 + Number(parts[1]) * 60 + Number(parts[2]);
-    else return null;
+        let sec = 0;
+        if (parts.length === 1) sec = Number(parts[0]);
+        else if (parts.length === 2) sec = Number(parts[0]) * 60 + Number(parts[1]);
+        else if (parts.length === 3) sec = Number(parts[0]) * 3600 + Number(parts[1]) * 60 + Number(parts[2]);
+        else return null;
 
-    return isFinite(sec) ? sec : null;
-  }
+        return isFinite(sec) ? sec : null;
+      }
 
-  function formatTime(seconds){
-    const s = Math.max(0, Math.floor(seconds || 0));
-    const hh = Math.floor(s / 3600);
-    const mm = Math.floor((s % 3600) / 60);
-    const ss = s % 60;
-    if (hh > 0) return `${hh}:${String(mm).padStart(2,"0")}:${String(ss).padStart(2,"0")}`;
-    return `${mm}:${String(ss).padStart(2,"0")}`;
-  }
+      function formatTime(seconds) {
+        const s = Math.max(0, Math.floor(seconds || 0));
+        const hh = Math.floor(s / 3600);
+        const mm = Math.floor((s % 3600) / 60);
+        const ss = s % 60;
+        if (hh > 0) return `${hh}:${String(mm).padStart(2, "0")}:${String(ss).padStart(2, "0")}`;
+        return `${mm}:${String(ss).padStart(2, "0")}`;
+      }
 
-  function firstNonEmpty(...vals){
-    for (const v of vals){
-      const s = (v == null) ? "" : String(v).trim();
-      if (s) return s;
-    }
-    return "";
-  }
+      function firstNonEmpty(...vals) {
+        for (const v of vals) {
+          const s = (v == null) ? "" : String(v).trim();
+          if (s) return s;
+        }
+        return "";
+      }
 
-  function parseCSV(text){
-    const out = [];
-    let row = [];
-    let cur = "";
-    let i = 0;
-    let inQuotes = false;
+      function parseCSV(text) {
+        const out = [];
+        let row = [];
+        let cur = "";
+        let i = 0;
+        let inQuotes = false;
 
-    while (i < text.length){
-      const c = text[i];
+        while (i < text.length) {
+          const c = text[i];
 
-      if (inQuotes){
-        if (c === '"'){
-          if (text[i+1] === '"'){
-            cur += '"';
-            i += 2;
+          if (inQuotes) {
+            if (c === '"') {
+              if (text[i + 1] === '"') {
+                cur += '"';
+                i += 2;
+                continue;
+              }
+              inQuotes = false;
+              i++;
+              continue;
+            }
+            cur += c;
+            i++;
             continue;
           }
-          inQuotes = false;
+
+          if (c === '"') {
+            inQuotes = true;
+            i++;
+            continue;
+          }
+
+          if (c === ",") {
+            row.push(cur);
+            cur = "";
+            i++;
+            continue;
+          }
+
+          if (c === "\n") {
+            row.push(cur);
+            out.push(row);
+            row = [];
+            cur = "";
+            i++;
+            continue;
+          }
+
+          if (c === "\r") {
+            i++;
+            continue;
+          }
+
+          cur += c;
           i++;
-          continue;
         }
-        cur += c;
-        i++;
-        continue;
-      }
 
-      if (c === '"'){
-        inQuotes = true;
-        i++;
-        continue;
-      }
-
-      if (c === ","){
-        row.push(cur);
-        cur = "";
-        i++;
-        continue;
-      }
-
-      if (c === "\n"){
         row.push(cur);
         out.push(row);
-        row = [];
-        cur = "";
-        i++;
-        continue;
+
+        while (out.length && out[out.length - 1].every(x => String(x ?? "").trim() === "")) {
+          out.pop();
+        }
+        return out;
       }
 
-      if (c === "\r"){
-        i++;
-        continue;
+      function buildSegments(obj) {
+        const segs = [];
+        for (let k = 1; k <= 9; k++) {
+          const ts = obj[`timestamp_${k}`];
+          const bn = obj[`bn_transcript_${k}`];
+          const en = obj[`en_transcript_${k}`];
+          const sec = parseTimestampToSeconds(ts);
+          if (sec == null) continue;
+
+          const bnText = (bn == null) ? "" : String(bn).trim();
+          const enText = (en == null) ? "" : String(en).trim();
+          if (!bnText && !enText) continue;
+
+          segs.push({ t: sec, ts: String(ts).trim(), bn: bnText, en: enText });
+        }
+        segs.sort((a, b) => a.t - b.t);
+        return segs;
       }
 
-      cur += c;
-      i++;
-    }
+      function derivePreview(obj) {
+        const segs = obj._segments || [];
+        const firstSeg = segs[0]?.[lang] || segs[0]?.en || segs[0]?.bn || "";
+        const fallback = firstNonEmpty(obj.raw_transcript, firstSeg, obj.file_name);
+        const txt = firstNonEmpty(firstSeg, fallback);
+        return txt || "—";
+      }
 
-    row.push(cur);
-    out.push(row);
+      function escapeHTML(str) {
+        return String(str ?? "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
 
-    while (out.length && out[out.length-1].every(x => String(x ?? "").trim() === "")){
-      out.pop();
-    }
-    return out;
-  }
+      function progressPercent() {
+        const d = elAudio.duration;
+        if (!isFinite(d) || d <= 0) return 0;
+        return clamp((elAudio.currentTime / d) * 100, 0, 100).toFixed(2);
+      }
 
-  function buildSegments(obj){
-    const segs = [];
-    for (let k = 1; k <= 9; k++){
-      const ts = obj[`timestamp_${k}`];
-      const bn = obj[`bn_transcript_${k}`];
-      const en = obj[`en_transcript_${k}`];
-      const sec = parseTimestampToSeconds(ts);
-      if (sec == null) continue;
+      function render() {
+        const listbar = elList.querySelector(".rc-listbar");
 
-      const bnText = (bn == null) ? "" : String(bn).trim();
-      const enText = (en == null) ? "" : String(en).trim();
-      if (!bnText && !enText) continue;
-
-      segs.push({ t: sec, ts: String(ts).trim(), bn: bnText, en: enText });
-    }
-    segs.sort((a,b) => a.t - b.t);
-    return segs;
-  }
-
-  function derivePreview(obj){
-    const segs = obj._segments || [];
-    const firstSeg = segs[0]?.[lang] || segs[0]?.en || segs[0]?.bn || "";
-    const fallback = firstNonEmpty(obj.raw_transcript, firstSeg, obj.file_name);
-    const txt = firstNonEmpty(firstSeg, fallback);
-    return txt || "—";
-  }
-
-  function escapeHTML(str){
-    return String(str ?? "")
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
-  }
-
-  function progressPercent(){
-    const d = elAudio.duration;
-    if (!isFinite(d) || d <= 0) return 0;
-    return clamp((elAudio.currentTime / d) * 100, 0, 100).toFixed(2);
-  }
-
-  function render(){
-    const listbar = elList.querySelector(".rc-listbar");
-
-    if (!rows.length){
-      elList.innerHTML = `
+        if (!rows.length) {
+          elList.innerHTML = `
         <div class="rc-listbar">
           <div class="rc-lang" role="tablist" aria-label="Subtitle language">
-            <button class="rc-lang-btn" data-lang="bn" role="tab" aria-selected="${lang==="bn"}" type="button">বা</button>
-            <button class="rc-lang-btn ${lang==="en" ? "is-active" : ""}" data-lang="en" role="tab" aria-selected="${lang==="en"}" type="button">En</button>
+            <button class="rc-lang-btn" data-lang="bn" role="tab" aria-selected="${lang === "bn"}" type="button">বা</button>
+            <button class="rc-lang-btn ${lang === "en" ? "is-active" : ""}" data-lang="en" role="tab" aria-selected="${lang === "en"}" type="button">En</button>
           </div>
         </div>
         <div class="rc-empty">No rows found in <code>${escapeHTML(CSV_URL)}</code>.</div>
       `;
-      elMore.style.display = "none";
-      return;
-    }
+          elMore.style.display = "none";
+          return;
+        }
 
-    elMore.style.display = (visibleCount < rows.length) ? "inline-flex" : "none";
+        elMore.style.display = (visibleCount < rows.length) ? "inline-flex" : "none";
 
-    const showRows = rows.slice(0, visibleCount);
+        const showRows = rows.slice(0, visibleCount);
 
-    const itemsHTML = showRows.map((r, idx) => {
-      const isActive = idx === activeIndex;
-      const preview = escapeHTML(derivePreview(r));
-      const fileLabel = escapeHTML(r.file_name || `Track ${idx+1}`);
+        const itemsHTML = showRows.map((r, idx) => {
+          const isActive = idx === activeIndex;
+          const preview = escapeHTML(derivePreview(r));
+          const fileLabel = escapeHTML(r.file_name || `Track ${idx + 1}`);
 
-      const playIcon = isActive && !elAudio.paused ? ICONS.pause : ICONS.play;
-      const stopDisabled = !(isActive && (elAudio.currentTime > 0 || !elAudio.paused));
+          const playIcon = isActive && !elAudio.paused ? ICONS.pause : ICONS.play;
+          const stopDisabled = !(isActive && (elAudio.currentTime > 0 || !elAudio.paused));
 
-      const subs = (r._segments || []).map((s, sidx) => {
-        const text = escapeHTML(firstNonEmpty(s[lang], s.en, s.bn));
-        const cur = (isActive && sidx === currentSegIndex) ? "is-current" : "";
-        return `
+          const subs = (r._segments || []).map((s, sidx) => {
+            const text = escapeHTML(firstNonEmpty(s[lang], s.en, s.bn));
+            const cur = (isActive && sidx === currentSegIndex) ? "is-current" : "";
+            return `
           <div class="rc-subline ${cur}" data-sidx="${sidx}">
             <div class="rc-ts">${escapeHTML(s.ts)}</div>
             <div class="rc-text">${text || "—"}</div>
           </div>
         `;
-      }).join("");
+          }).join("");
 
-      return `
+          return `
         <div class="rc-item ${isActive ? "is-active" : ""}" data-idx="${idx}">
           <div class="rc-row">
             <div class="rc-ctrl">
@@ -948,194 +940,194 @@
           </div>
         </div>
       `;
-    }).join("");
+        }).join("");
 
-    // rebuild list but keep listbar at the top
-    const langHTML = `
+        // rebuild list but keep listbar at the top
+        const langHTML = `
       <div class="rc-listbar">
         <div class="rc-lang" role="tablist" aria-label="Subtitle language">
-          <button class="rc-lang-btn ${lang==="bn" ? "is-active" : ""}" data-lang="bn" role="tab" aria-selected="${lang==="bn"}" type="button">বা</button>
-          <button class="rc-lang-btn ${lang==="en" ? "is-active" : ""}" data-lang="en" role="tab" aria-selected="${lang==="en"}" type="button">En</button>
+          <button class="rc-lang-btn ${lang === "bn" ? "is-active" : ""}" data-lang="bn" role="tab" aria-selected="${lang === "bn"}" type="button">বা</button>
+          <button class="rc-lang-btn ${lang === "en" ? "is-active" : ""}" data-lang="en" role="tab" aria-selected="${lang === "en"}" type="button">En</button>
         </div>
       </div>
     `;
 
-    elList.innerHTML = langHTML + itemsHTML;
-  }
+        elList.innerHTML = langHTML + itemsHTML;
+      }
 
-  function setActive(idx, autoplay = false){
-    if (idx < 0 || idx >= rows.length) return;
+      function setActive(idx, autoplay = false) {
+        if (idx < 0 || idx >= rows.length) return;
 
-    const changed = idx !== activeIndex;
-    activeIndex = idx;
-    currentSegIndex = -1;
+        const changed = idx !== activeIndex;
+        activeIndex = idx;
+        currentSegIndex = -1;
 
-    const row = rows[activeIndex];
-    const src = AUDIO_DIR + (row.file_name || "");
-    if (changed){
-      elAudio.pause();
-      elAudio.currentTime = 0;
-      elAudio.src = src;
-    } else {
-      if (!elAudio.src.endsWith(src)) elAudio.src = src;
-    }
+        const row = rows[activeIndex];
+        const src = AUDIO_DIR + (row.file_name || "");
+        if (changed) {
+          elAudio.pause();
+          elAudio.currentTime = 0;
+          elAudio.src = src;
+        } else {
+          if (!elAudio.src.endsWith(src)) elAudio.src = src;
+        }
 
-    render();
+        render();
 
-    const elItem = elList.querySelector(`.rc-item[data-idx="${activeIndex}"]`);
-    if (elItem) elItem.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        const elItem = elList.querySelector(`.rc-item[data-idx="${activeIndex}"]`);
+        if (elItem) elItem.scrollIntoView({ block: "nearest", behavior: "smooth" });
 
-    if (autoplay){
-      elAudio.play().catch(() => {});
-    }
-  }
+        if (autoplay) {
+          elAudio.play().catch(() => { });
+        }
+      }
 
-  function togglePlay(idx){
-    if (activeIndex !== idx){
-      setActive(idx, true);
-      return;
-    }
-    if (elAudio.paused) elAudio.play().catch(() => {});
-    else elAudio.pause();
-    render();
-  }
-
-  function stop(){
-    elAudio.pause();
-    elAudio.currentTime = 0;
-    currentSegIndex = -1;
-    render();
-  }
-
-  function updateCurrentSegment(){
-    if (activeIndex < 0) return;
-    const segs = rows[activeIndex]._segments || [];
-    if (!segs.length) return;
-
-    const t = elAudio.currentTime || 0;
-
-    let idx = -1;
-    for (let i = 0; i < segs.length; i++){
-      if (segs[i].t <= t) idx = i;
-      else break;
-    }
-    if (idx === currentSegIndex) return;
-    currentSegIndex = idx;
-    render();
-    scrollSubtitleIntoView();
-  }
-
-  function scrollSubtitleIntoView(){
-    const container = elList.querySelector(`.rc-item[data-idx="${activeIndex}"] .rc-subs`);
-    const current = elList.querySelector(`.rc-item[data-idx="${activeIndex}"] .rc-subline.is-current`);
-    if (!container || !current) return;
-
-    const cTop = container.scrollTop;
-    const cH = container.clientHeight;
-
-    const rTop = current.offsetTop;
-    const rH = current.offsetHeight;
-
-    const pad = 24;
-    if (rTop < cTop + pad){
-      container.scrollTop = Math.max(0, rTop - pad);
-    } else if (rTop + rH > cTop + cH - pad){
-      container.scrollTop = (rTop + rH) - cH + pad;
-    }
-  }
-
-  function seekFromClick(progressEl, clientX){
-    const rect = progressEl.getBoundingClientRect();
-    const x = clamp(clientX - rect.left, 0, rect.width);
-    const ratio = rect.width ? (x / rect.width) : 0;
-    if (!isFinite(elAudio.duration) || elAudio.duration <= 0) return;
-    elAudio.currentTime = ratio * elAudio.duration;
-    updateCurrentSegment();
-    render();
-  }
-
-  elRoot.addEventListener("click", (e) => {
-    // Language toggle
-    const langBtn = e.target.closest(".rc-lang-btn");
-    if (langBtn){
-      const next = langBtn.getAttribute("data-lang");
-      if (next && next !== lang){
-        lang = next;
+      function togglePlay(idx) {
+        if (activeIndex !== idx) {
+          setActive(idx, true);
+          return;
+        }
+        if (elAudio.paused) elAudio.play().catch(() => { });
+        else elAudio.pause();
         render();
       }
-      return;
-    }
 
-    const btn = e.target.closest("[data-action]");
-    const item = e.target.closest(".rc-item");
-    if (!btn || !item) return;
-
-    const idx = Number(item.getAttribute("data-idx"));
-    const action = btn.getAttribute("data-action");
-
-    if (action === "toggle"){
-      togglePlay(idx);
-      return;
-    }
-
-    if (action === "stop"){
-      if (idx === activeIndex) stop();
-      return;
-    }
-
-    if (action === "seek"){
-      if (idx !== activeIndex) setActive(idx, false);
-      seekFromClick(btn, e.clientX);
-      return;
-    }
-  });
-
-  elMore.addEventListener("click", () => {
-    visibleCount = Math.min(rows.length, visibleCount + 6);
-    render();
-  });
-
-  elAudio.addEventListener("timeupdate", () => {
-    updateCurrentSegment();
-    const fill = elList.querySelector(`.rc-item[data-idx="${activeIndex}"] .rc-progress-fill`);
-    if (fill) fill.style.width = progressPercent() + "%";
-    const timebar = elList.querySelector(`.rc-item[data-idx="${activeIndex}"] .rc-timebar > div:first-child`);
-    if (timebar) timebar.textContent = formatTime(elAudio.currentTime);
-  });
-
-  elAudio.addEventListener("loadedmetadata", () => render());
-  elAudio.addEventListener("play", () => render());
-  elAudio.addEventListener("pause", () => render());
-  elAudio.addEventListener("ended", () => render());
-
-  async function init(){
-    try{
-      const res = await fetch(CSV_URL, { cache: "no-store" });
-      if (!res.ok) throw new Error(`Failed to fetch ${CSV_URL} (${res.status})`);
-      const text = await res.text();
-
-      const table = parseCSV(text);
-      if (!table.length) throw new Error("CSV appears empty.");
-
-      const headers = table[0].map(h => String(h || "").trim());
-      const data = table.slice(1);
-
-      rows = data
-        .filter(r => r.some(v => String(v ?? "").trim() !== ""))
-        .map((cells) => {
-          const obj = {};
-          headers.forEach((h, i) => { obj[h] = (cells[i] ?? "").toString(); });
-          obj._segments = buildSegments(obj);
-          return obj;
-        });
-
-      if (rows.length){
-        setActive(0, false); // default expanded item (not autoplay)
-      } else {
+      function stop() {
+        elAudio.pause();
+        elAudio.currentTime = 0;
+        currentSegIndex = -1;
         render();
       }
-    } catch(err){
-      elList.innerHTML = `
+
+      function updateCurrentSegment() {
+        if (activeIndex < 0) return;
+        const segs = rows[activeIndex]._segments || [];
+        if (!segs.length) return;
+
+        const t = elAudio.currentTime || 0;
+
+        let idx = -1;
+        for (let i = 0; i < segs.length; i++) {
+          if (segs[i].t <= t) idx = i;
+          else break;
+        }
+        if (idx === currentSegIndex) return;
+        currentSegIndex = idx;
+        render();
+        scrollSubtitleIntoView();
+      }
+
+      function scrollSubtitleIntoView() {
+        const container = elList.querySelector(`.rc-item[data-idx="${activeIndex}"] .rc-subs`);
+        const current = elList.querySelector(`.rc-item[data-idx="${activeIndex}"] .rc-subline.is-current`);
+        if (!container || !current) return;
+
+        const cTop = container.scrollTop;
+        const cH = container.clientHeight;
+
+        const rTop = current.offsetTop;
+        const rH = current.offsetHeight;
+
+        const pad = 24;
+        if (rTop < cTop + pad) {
+          container.scrollTop = Math.max(0, rTop - pad);
+        } else if (rTop + rH > cTop + cH - pad) {
+          container.scrollTop = (rTop + rH) - cH + pad;
+        }
+      }
+
+      function seekFromClick(progressEl, clientX) {
+        const rect = progressEl.getBoundingClientRect();
+        const x = clamp(clientX - rect.left, 0, rect.width);
+        const ratio = rect.width ? (x / rect.width) : 0;
+        if (!isFinite(elAudio.duration) || elAudio.duration <= 0) return;
+        elAudio.currentTime = ratio * elAudio.duration;
+        updateCurrentSegment();
+        render();
+      }
+
+      elRoot.addEventListener("click", (e) => {
+        // Language toggle
+        const langBtn = e.target.closest(".rc-lang-btn");
+        if (langBtn) {
+          const next = langBtn.getAttribute("data-lang");
+          if (next && next !== lang) {
+            lang = next;
+            render();
+          }
+          return;
+        }
+
+        const btn = e.target.closest("[data-action]");
+        const item = e.target.closest(".rc-item");
+        if (!btn || !item) return;
+
+        const idx = Number(item.getAttribute("data-idx"));
+        const action = btn.getAttribute("data-action");
+
+        if (action === "toggle") {
+          togglePlay(idx);
+          return;
+        }
+
+        if (action === "stop") {
+          if (idx === activeIndex) stop();
+          return;
+        }
+
+        if (action === "seek") {
+          if (idx !== activeIndex) setActive(idx, false);
+          seekFromClick(btn, e.clientX);
+          return;
+        }
+      });
+
+      elMore.addEventListener("click", () => {
+        visibleCount = Math.min(rows.length, visibleCount + 6);
+        render();
+      });
+
+      elAudio.addEventListener("timeupdate", () => {
+        updateCurrentSegment();
+        const fill = elList.querySelector(`.rc-item[data-idx="${activeIndex}"] .rc-progress-fill`);
+        if (fill) fill.style.width = progressPercent() + "%";
+        const timebar = elList.querySelector(`.rc-item[data-idx="${activeIndex}"] .rc-timebar > div:first-child`);
+        if (timebar) timebar.textContent = formatTime(elAudio.currentTime);
+      });
+
+      elAudio.addEventListener("loadedmetadata", () => render());
+      elAudio.addEventListener("play", () => render());
+      elAudio.addEventListener("pause", () => render());
+      elAudio.addEventListener("ended", () => render());
+
+      async function init() {
+        try {
+          const res = await fetch(CSV_URL, { cache: "no-store" });
+          if (!res.ok) throw new Error(`Failed to fetch ${CSV_URL} (${res.status})`);
+          const text = await res.text();
+
+          const table = parseCSV(text);
+          if (!table.length) throw new Error("CSV appears empty.");
+
+          const headers = table[0].map(h => String(h || "").trim());
+          const data = table.slice(1);
+
+          rows = data
+            .filter(r => r.some(v => String(v ?? "").trim() !== ""))
+            .map((cells) => {
+              const obj = {};
+              headers.forEach((h, i) => { obj[h] = (cells[i] ?? "").toString(); });
+              obj._segments = buildSegments(obj);
+              return obj;
+            });
+
+          if (rows.length) {
+            setActive(0, false); // default expanded item (not autoplay)
+          } else {
+            render();
+          }
+        } catch (err) {
+          elList.innerHTML = `
         <div class="rc-listbar">
           <div class="rc-lang" role="tablist" aria-label="Subtitle language">
             <button class="rc-lang-btn" data-lang="bn" role="tab" aria-selected="false" type="button">বা</button>
@@ -1144,13 +1136,13 @@
         </div>
         <div class="rc-empty">Could not load <code>${escapeHTML(CSV_URL)}</code>. ${escapeHTML(err.message || String(err))}</div>
       `;
-      elMore.style.display = "none";
-    }
-  }
+          elMore.style.display = "none";
+        }
+      }
 
-  init();
-})();
-</script>
+      init();
+    })();
+  </script>
 </body>
 
 </html>

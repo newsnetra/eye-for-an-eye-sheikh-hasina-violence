@@ -28,7 +28,8 @@
     --bg-highlight: #f0f0f0;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     color: var(--text-color);
     background-color: var(--accent);
@@ -52,7 +53,6 @@ article {
     height: 35px;
     width: 100%;
     background: var(--accent);
-    border-bottom: 1px solid #eee;
     z-index: 9999;
     display: flex;
     align-items: center;
@@ -159,7 +159,8 @@ article {
     padding-top: clamp(4px, 1vw, 14px);
 }
 
-h2, .hero__title {
+h2,
+.hero__title {
     margin: 0 0 18px 0;
     font-size: clamp(44px, 6.2vw, 84px);
     line-height: 0.98;
@@ -176,7 +177,7 @@ h2 {
 
 .hero__dek {
     margin: 0 0 18px 0;
-    font-size: clamp(14px, 1.4vw, 20px);
+    font-size: clamp(18px, 1.4vw, 20px);
     line-height: 1.55;
     font-style: italic;
     font-family: 'utopia-std-display', var(--font-utopia);
@@ -556,6 +557,7 @@ p {
 
 /* 2. INLINE PLAYER CONTAINER
        ========================================= */
+
 .inline-trigger {
     cursor: pointer;
     display: inline;
@@ -563,56 +565,51 @@ p {
     transition: all 0.2s ease;
 }
 
-/* 3. ICON STYLES (From Snippet 1)
-       ========================================= */
 .inline-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
+    width: 25px;
+    height: 25px;
     margin-right: 6px;
-    border-radius: 4px;
-    transform: translateY(4px);
-    /* Visual alignment */
-    /* The Grid Pattern Background */
-    background-color: var(--bg);
-    border: 1px solid rgba(225, 53, 53, 0.2);
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.12) 1px, transparent 1px);
-    background-size: 15px 15px;
+
+    /* Grid background */
+    background-image:
+        linear-gradient(to right, rgba(0, 0, 0, 0.12) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.12) 1px, transparent 1px);
+    background-size: 10px 10px;
+
     transition: all 0.2s;
 }
 
-.inline-icon svg {
+/* MASK ICONS (external SVGs, colour via background-color) */
+.inline-icon .icon {
     width: 15px;
     height: 15px;
-    fill: var(--accent);
     display: block;
-    /* Fixes SVG spacing issues */
+    background-color: #d94c3f;
+
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
 }
 
-/* Hover State */
-.inline-trigger:hover .inline-icon {
-    background-color: rgba(225, 53, 53, 0.2);
+.inline-icon .icon-play {
+    -webkit-mask-image: url("./assets/icons/play.svg");
+    mask-image: url("./assets/icons/play.svg");
+    display: block;
 }
 
-/* Playing State (Active) */
-.inline-trigger.playing .inline-icon {
-    background-color: var(--accent);
-    border-color: var(--accent);
-    background-image: none;
-}
-
-.inline-trigger.playing .inline-icon svg {
-    fill: var(--panel);
-}
-
-/* Icon Toggling Logic */
-.icon-pause {
+.inline-icon .icon-pause {
+    -webkit-mask-image: url("./assets/icons/pause.svg");
+    mask-image: url("./assets/icons/pause.svg");
     display: none;
 }
 
-/* Default hidden */
+/* Toggle play/pause */
 .inline-trigger.playing .icon-play {
     display: none;
 }
@@ -620,9 +617,6 @@ p {
 .inline-trigger.playing .icon-pause {
     display: block;
 }
-
-
-
 
 .highlight-text {
     color: var(--text-color);
@@ -649,6 +643,10 @@ p {
     text-decoration: underline;
     text-decoration-color: var(--accent);
 }
+
+
+/* 3. FOOTER
+       ========================================= */
 
 footer {
     background: var(--accent);
@@ -764,216 +762,231 @@ footer {
 
 
 
-  .rc-player{
+.rc-player {
     font-family: var(--mono);
     max-width: 920px;
     margin: auto;
-  }
+}
 
-  .rc-list{
+.rc-list {
     border-radius: 18px;
-    background: rgba(0,0,0,.03);
-    border-bottom: 1px solid rgba(0,0,0,.06);
+    background: rgba(0, 0, 0, .03);
+    border-bottom: 1px solid rgba(0, 0, 0, .06);
     padding: 10px;
-  }
+}
 
-  .rc-listbar{
-    display:flex;
-    justify-content:flex-start;
+.rc-listbar {
+    display: flex;
+    justify-content: flex-start;
     padding: 6px 6px 12px 6px;
-  }
+}
 
-  .rc-lang{
-    display:inline-flex;
+.rc-lang {
+    display: inline-flex;
     gap: 6px;
     padding: 6px;
     border-radius: 999px;
-    border: 1px solid rgba(0,0,0,.06);
-  }
-  .rc-lang-btn{
-    appearance:none;
+    border: 1px solid rgba(0, 0, 0, .06);
+}
+
+.rc-lang-btn {
+    appearance: none;
     border: 0;
     background: transparent;
     font-family: inherit;
     font-size: 14px;
     padding: 6px 10px;
     border-radius: 999px;
-    cursor:pointer;
-    opacity:.7;
-  }
-  .rc-lang-btn.is-active{
-    background: rgba(255,255,255,.9);
-    border: 1px solid rgba(0,0,0,.08);
+    cursor: pointer;
+    opacity: .7;
+}
+
+.rc-lang-btn.is-active {
+    background: rgba(255, 255, 255, .9);
+    border: 1px solid rgba(0, 0, 0, .08);
     opacity: 1;
-  }
+}
 
-  .rc-item{
+.rc-item {
     overflow: hidden;
-    border-bottom: 1px solid rgba(0,0,0,.06);
+    border-bottom: 1px solid rgba(0, 0, 0, .06);
     margin: 10px 6px;
-  }
+}
 
-  .rc-row{
-    display:flex;
-    align-items:center;
+.rc-row {
+    display: flex;
+    align-items: center;
     gap: 10px;
     padding: 14px 14px;
-  }
+}
 
-  .rc-ctrl{
-    display:flex;
-    align-items:center;
+.rc-ctrl {
+    display: flex;
+    align-items: center;
     gap: 8px;
     flex: 0 0 auto;
-  }
+}
 
-  .rc-iconbtn{
+.rc-iconbtn {
     width: 34px;
     height: 34px;
     border-radius: 999px;
     border: transparent;
     background: transparent;
-    display:grid;
-    place-items:center;
-    cursor:pointer;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
     padding: 0;
-  }
-  .rc-iconbtn:active{ transform: translateY(1px); }
-  .rc-iconbtn[disabled]{
-    opacity:.45;
-    cursor:not-allowed;
-  }
-  .rc-icon{
+}
+
+.rc-iconbtn:active {
+    transform: translateY(1px);
+}
+
+.rc-iconbtn[disabled] {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.rc-icon {
     width: 25px;
     height: 25px;
-    display:block;
-    opacity:.9;
-  }
+    display: block;
+    opacity: .9;
+}
 
-  .rc-main{
+.rc-main {
     min-width: 0;
     flex: 1 1 auto;
-  }
+}
 
-  .rc-title{
-    display:flex;
-    align-items:baseline;
+.rc-title {
+    display: flex;
+    align-items: baseline;
     gap: 10px;
     min-width: 0;
-  }
+}
 
-  .rc-file{
+.rc-file {
     font-size: 12px;
     opacity: .55;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 36ch;
-  }
+}
 
-  .rc-preview{
+.rc-preview {
     font-size: 22px;
     line-height: 1.3;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     opacity: .75;
-  }
+}
 
-  .rc-item.is-active .rc-preview{
+.rc-item.is-active .rc-preview {
     opacity: 1;
-    color: rgba(0,0,0,.9);
-  }
+    color: rgba(0, 0, 0, .9);
+}
 
-  .rc-body{
-    display:none;
+.rc-body {
+    display: none;
     padding: 0 14px 14px 14px;
-  }
-  .rc-item.is-active .rc-body{
-    display:block;
-  }
+}
 
-  .rc-progress{
+.rc-item.is-active .rc-body {
+    display: block;
+}
+
+.rc-progress {
     position: relative;
     height: 6px;
     border-radius: 999px;
-    background: rgba(0,0,0,.12);
+    background: rgba(0, 0, 0, .12);
     cursor: pointer;
     margin: 8px 0 12px 0;
-  }
-  .rc-progress-fill{
-    position:absolute;
-    left:0;
-    top:0;
-    height:100%;
-    width:0%;
+}
+
+.rc-progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
     border-radius: 999px;
     background: var(--accent);
-  }
-  .rc-timebar{
-    display:flex;
-    justify-content:space-between;
-    font-size: 12px;
-    opacity:.6;
-    margin-top: 6px;
-  }
+}
 
-  .rc-subs{
+.rc-timebar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    opacity: .6;
+    margin-top: 6px;
+}
+
+.rc-subs {
     border-radius: 8px;
-    background: rgba(255,255,255,.75);
-    border: 1px solid rgba(0,0,0,.06);
-    overflow:hidden;
+    background: rgba(255, 255, 255, .75);
+    border: 1px solid rgba(0, 0, 0, .06);
+    overflow: hidden;
     max-height: 210px;
     margin: 10px auto;
-  }
+}
 
-  .rc-subline{
-    display:flex;
-    align-items:flex-start;
+.rc-subline {
+    display: flex;
+    align-items: flex-start;
     gap: 12px;
     padding: 12px 12px;
-    border-top: 1px solid rgba(0,0,0,.05);
-  }
-  .rc-subline:first-child{ border-top: 0; }
+    border-top: 1px solid rgba(0, 0, 0, .05);
+}
 
-  .rc-ts{
+.rc-subline:first-child {
+    border-top: 0;
+}
+
+.rc-ts {
     font-size: 12px;
-    opacity:.55;
+    opacity: .55;
     width: 54px;
     flex: 0 0 auto;
-  }
-  .rc-text{
+}
+
+.rc-text {
     font-size: 22px;
     line-height: 1.35;
     min-width: 0;
-  }
+}
 
-  .rc-subline.is-current{
-    background: rgba(217,76,63,.10);
-  }
+.rc-subline.is-current {
+    background: rgba(217, 76, 63, .10);
+}
 
-  .rc-footer{
-    display:flex;
-    justify-content:center;
+.rc-footer {
+    display: flex;
+    justify-content: center;
     padding: 12px 0 0 0;
-  }
-  .rc-more{
+}
+
+.rc-more {
     font-family: inherit;
     font-size: 14px;
     padding: 10px 14px;
     border-radius: 999px;
-    border: 1px solid rgba(0,0,0,.10);
-    background: rgba(255,255,255,.9);
-    cursor:pointer;
-  }
+    border: 1px solid rgba(0, 0, 0, .10);
+    background: rgba(255, 255, 255, .9);
+    cursor: pointer;
+}
 
-  .rc-empty{
+.rc-empty {
     padding: 18px;
     opacity: .7;
     font-size: 14px;
-  }
+}
 
-  
+
 
 
 
@@ -1018,17 +1031,38 @@ footer {
     }
 }
 
+
+@media (max-width: 640px) {
+
+    .rc-preview,
+    .rc-text {
+        font-size: 18px;
+    }
+
+    .rc-file {
+        max-width: 22ch;
+    }
+
+    .hero__text {
+        text-align: center;
+    }
+
+    .hero__rule {
+        margin: auto;
+    }
+
+    .hero__byline {
+        margin-top: 10px;
+    }
+
+}
+
 @media (max-width: 450px) {
     .tg-call {
         max-width: 100%;
     }
 
     .karaoke-word {
-    font-size: 20px;
+        font-size: 20px;
+    }
 }
-}
-
-@media (max-width: 640px){
-    .rc-preview, .rc-text{ font-size: 18px; }
-    .rc-file{ max-width: 22ch; }
-  }
