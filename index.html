@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-  <title>Sheikh Hasina demands an eye for an eye</title>
+  <title>An eye for an eye</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -15,6 +15,52 @@
   <link rel="preconnect" href="https://p.typekit.net" crossorigin="">
   <link rel="stylesheet" as="style" href="https://use.typekit.net/ngq3ctm.css?display=swap"
     onload="this.onload=null;this.rel='stylesheet'">
+
+  <meta name="description"
+    content="Netra News reviewed widely shared audio clips of Sheikh Hasina urging revenge and violence, contrasting them with her appeals for peace in international interviews.">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Netra News">
+  <meta property="og:url" content="https://interactive.netra.news/eye-for-an-eye-sheikh-hasina-violence/">
+
+  <meta property="og:title" content="An eye for an eye">
+  <meta property="og:description"
+    content="Audio clips long circulating among Awami League supporters show Sheikh Hasina urging violent retaliation, contrasting with her conciliatory message to foreign media.">
+
+  <meta property="og:image"
+    content="https://interactive.netra.news/eye-for-an-eye-sheikh-hasina-violence/assets/photos/hasina-bg.gif">
+  <meta property="og:image:alt"
+    content="Illustration for Netra News interactive on Sheikh Hasina’s rhetoric on violence">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="An eye for an eye">
+  <meta name="twitter:description"
+    content="Widely shared audio clips show Sheikh Hasina urging retaliation and violence, contrasting with her message to international media.">
+  <meta name="twitter:image"
+    content="https://interactive.netra.news/eye-for-an-eye-sheikh-hasina-violence/assets/photos/hasina-bg.gif">
+
+<meta name="twitter:site" content="@NetraNews">
+<meta name="twitter:creator" content="@aaqibshatil">
+<meta property="article:publisher" content="https://www.facebook.com/newsnetra">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsMediaOrganization",
+  "name": "Netra News",
+  "url": "https://netra.news",
+  "logo": "https://netra.news/content/images/2022/07/nn-small-logo-2--1---1-.png",
+  "sameAs": [
+    "https://twitter.com/NetraNews",
+    "https://www.facebook.com/newsnetra",
+    "https://www.linkedin.com/company/netra-news"
+  ]
+}
+</script>
+
+
 </head>
 
 <body>
@@ -1017,42 +1063,42 @@
 
 
       function setActiveSpeaker(name) {
-  const norm = (s) => String(s || "").trim().toLowerCase().replace(/\s+/g, " ");
-  const speaker = norm(name);
+        const norm = (s) => String(s || "").trim().toLowerCase().replace(/\s+/g, " ");
+        const speaker = norm(name);
 
-  // Clear primary speaking state
-  const primary = root.querySelector(".tg-tile--primary");
-  if (!primary) return;
-  primary.classList.remove("is-speaking");
+        // Clear primary speaking state
+        const primary = root.querySelector(".tg-tile--primary");
+        if (!primary) return;
+        primary.classList.remove("is-speaking");
 
-  // Restore all mini tiles to their original selves first
-  setMini("Follower 1", miniDefaults["Follower 1"].name, miniDefaults["Follower 1"].abbr);
-  setMini("Follower 2", miniDefaults["Follower 2"].name, miniDefaults["Follower 2"].abbr);
-  setMini("Follower 3", miniDefaults["Follower 3"].name, miniDefaults["Follower 3"].abbr);
+        // Restore all mini tiles to their original selves first
+        setMini("Follower 1", miniDefaults["Follower 1"].name, miniDefaults["Follower 1"].abbr);
+        setMini("Follower 2", miniDefaults["Follower 2"].name, miniDefaults["Follower 2"].abbr);
+        setMini("Follower 3", miniDefaults["Follower 3"].name, miniDefaults["Follower 3"].abbr);
 
-  // If Hasina is speaking: primary = SH, minis stay F1/F2/F3
-  if (speaker === norm("Sheikh Hasina")) {
-    setPrimary("Sheikh Hasina");
-    return;
-  }
+        // If Hasina is speaking: primary = SH, minis stay F1/F2/F3
+        if (speaker === norm("Sheikh Hasina")) {
+          setPrimary("Sheikh Hasina");
+          return;
+        }
 
-  // Otherwise, follower speaks: put follower in primary…
-  // …and put SH into that follower's mini slot
-  const followerKeys = ["Follower 1", "Follower 2", "Follower 3"];
-  const activeFollower = followerKeys.find(k => norm(k) === speaker);
+        // Otherwise, follower speaks: put follower in primary…
+        // …and put SH into that follower's mini slot
+        const followerKeys = ["Follower 1", "Follower 2", "Follower 3"];
+        const activeFollower = followerKeys.find(k => norm(k) === speaker);
 
-  if (!activeFollower) {
-    // Unknown speaker label: fall back to showing them in primary
-    setPrimary(name);
-    return;
-  }
+        if (!activeFollower) {
+          // Unknown speaker label: fall back to showing them in primary
+          setPrimary(name);
+          return;
+        }
 
-  // Active follower takes the primary tile
-  setPrimary(activeFollower);
+        // Active follower takes the primary tile
+        setPrimary(activeFollower);
 
-  // SH takes the active follower's mini slot
-  setMini(activeFollower, primaryDefault.name, primaryDefault.abbr);
-}
+        // SH takes the active follower's mini slot
+        setMini(activeFollower, primaryDefault.name, primaryDefault.abbr);
+      }
 
 
 
