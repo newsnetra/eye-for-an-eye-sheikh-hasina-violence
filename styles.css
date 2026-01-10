@@ -50,6 +50,8 @@ a {
 
 article {
     background: var(--panel);
+    padding-top: 15px;
+    margin-top: -2px;
 }
 
 .header-bar {
@@ -218,7 +220,7 @@ h2 {
 .story-text,
 p {
     max-width: 618px;
-    margin: 0 auto 30px auto;
+    margin: 0 auto 35px auto;
     font-family: var(--font-utopia);
     font-size: clamp(1.4rem, 2vw, 1.3rem);
     line-height: 1.4;
@@ -1065,7 +1067,12 @@ footer {
     .story-text,
     p,
     h2 {
-        margin: -1px 18px 18px 18px;
+        margin: -1px 18px 20px 18px;
+        letter-spacing: unset;
+    }
+
+    .story-text {
+        font-size: 1.3rem;
     }
 }
 
@@ -1100,7 +1107,7 @@ footer {
     /* Overall container: fit viewport */
     .tg-call {
         max-width: 100%;
-        margin: 0;
+        margin: 20px 0;
         border-radius: 0;
         padding: 12px;
         height: 90vh;
